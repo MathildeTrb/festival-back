@@ -16,10 +16,10 @@ export class ExhibitorMonitoring {
     festival: Festival;
 
     @ManyToOne(() => MonitoringExhibitorStatus)
-    status: MonitoringExhibitorStatus
+    status: MonitoringExhibitorStatus;
 
     @ManyToOne(() => Reservation)
-    reservation: Reservation
+    reservation: Reservation;
 
     @Column("datetime", {name: "date_contact_1"})
     dateContact1: Date;
@@ -28,5 +28,5 @@ export class ExhibitorMonitoring {
     dateContact2: Date;
 
     @Column("datetime", {name: "date_contact_3"})
-    dateContact3: Date
+    dateContact3: Date;
 }
