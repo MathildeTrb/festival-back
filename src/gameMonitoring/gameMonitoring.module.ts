@@ -4,4 +4,4 @@ import {DatabaseModule} from "../database/database.module";
 @Module({
     imports: [DatabaseModule]
 })
-export class AreaModule {}
+export class GameMonitoringModule {}

@@ -13,7 +13,10 @@ export class Contact {
     @Column({name: "lastname_contact"})
     lastname: string;
 
-    @Column({name: "mail_contact"})
+    @Column({
+        name: "mail_contact",
+        unique: true
+    })
     mail: string;
 
     @Column({name: "mobile_phone_number_contact"})
@@ -25,12 +28,19 @@ export class Contact {
     @Column({name: "job_contact"})
     job: string;
 
-    @Column({name: "is_important"})
+    @Column({
+        name: "is_important",
+        default: false
+    })
     isImportant: boolean;
 
-    @Column({name: "is_deleted"})
+    @Column({
+        name: "is_deleted",
+        default: false
+    })
     isDeleted: boolean;
 
     @ManyToOne(() => Company)
+    @Column("int", {name: "id_company"})
     company: Company
 }

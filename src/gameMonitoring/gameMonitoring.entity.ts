@@ -1,12 +1,13 @@
-import {Column, ManyToOne, PrimaryColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
 import {User} from "../user/user.entity";
 import {Reservation} from "../reservation/reservation.entity";
-import {MonitoringGameStatus} from "../monitoringGameStatus/monitoringGameStatus.entity";
+import {GameMonitoringStatus} from "../gameMonitoringStatus/gameMonitoringStatus.entity";
 import {Area} from "../area/area.entity";
 
-export class MonitoringGame {
+@Entity("game_monitoring")
+export class GameMonitoring {
 
-    @ManyToOne(() => MonitoringGame)
+    @ManyToOne(() => GameMonitoring)
     @PrimaryColumn("int", {name: "id_game"})
     game: User;
 
@@ -38,11 +39,11 @@ export class MonitoringGame {
     @Column("double", {name: "returned_price"})
     returnedPrice: number
 
-    @ManyToOne(() => MonitoringGameStatus)
-    @Column({name: "id_monitoring_game_status"})
-    status: MonitoringGameStatus
+    @ManyToOne(() => GameMonitoringStatus, gameMonitoringStatus => gameMonitoringStatus.gameMonitorings)
+    @Column("int", {name: "id_game_monitoring_status"})
+    status: GameMonitoringStatus
 
-    @ManyToOne(() => Area)
-    @Column({name: "id_area"})
+    @ManyToOne(() => Area, area => area.gameMonitorings)
+    @Column("int", {name: "id_area"})
     area: Area
 }

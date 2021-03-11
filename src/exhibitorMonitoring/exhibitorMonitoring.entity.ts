@@ -1,7 +1,7 @@
 import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
 import {Company} from "../company/company.entity";
 import {Festival} from "../festival/festival.entity";
-import {MonitoringExhibitorStatus} from "../monitoringExhibitorStatus/monitoringExhibitorStatus.entity";
+import {ExhibitorMonitoringStatus} from "../exhibitorMonitoringStatus/exhibitorMonitoringStatus.entity";
 import {Reservation} from "../reservation/reservation.entity";
 
 @Entity("exhibitor_monitoring")
@@ -15,8 +15,9 @@ export class ExhibitorMonitoring {
     @PrimaryColumn("int", {name: "id_festival"})
     festival: Festival;
 
-    @ManyToOne(() => MonitoringExhibitorStatus)
-    status: MonitoringExhibitorStatus;
+    @ManyToOne(() => ExhibitorMonitoringStatus)
+    @Column("int", {name: "id_exhibitor_monitoring_status"})
+    status: ExhibitorMonitoringStatus;
 
     @ManyToOne(() => Reservation)
     reservation: Reservation;

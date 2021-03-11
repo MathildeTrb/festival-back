@@ -6,11 +6,11 @@ import {Space} from "../space/space.entity";
 export class ReservationDetails {
 
     @ManyToOne(() => Reservation)
-    @PrimaryColumn({name: "id_reservation"})
+    @PrimaryColumn("int", {name: "id_reservation"})
     reservation: Reservation;
 
     @ManyToOne(() => Space)
-    @PrimaryColumn({name: "id_space"})
+    @PrimaryColumn("int", {name: "id_space"})
     space: Space;
 
     @Column("double", {name: "table_reserved_number"})

@@ -1,15 +1,20 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Festival} from "../festival/festival.entity";
+import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 
 @Entity("area")
 export class Area {
+
     @PrimaryGeneratedColumn({name: "id_area"})
-    id: number
+    id: number;
 
     @Column({name: "label_area"})
-    label: string
+    label: string;
 
     @ManyToOne(() => Festival)
-    @Column({name: "id_festival"})
-    festival: Festival
+    @Column("int", {name: "id_festival"})
+    festival: Festival;
+
+    @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.area)
+    gameMonitorings: GameMonitoring[];
 }
