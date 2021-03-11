@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Game } from "../game/game.entity";
 
 @Entity("company")
 export class Company {
@@ -23,6 +24,7 @@ export class Company {
   @Column({name: "is_deleted"})
   isDeleted: boolean;
 
-  //TODO: est ce que l'on met un oneToMany pour avoir un tableau de jeu par éditeur
-  //je pense que oui mais j'ai peur qu'on arrive pas a gérer le isEditor
+  @OneToMany(() => Game, game => game.editor)
+  games: Game[]
+
 }

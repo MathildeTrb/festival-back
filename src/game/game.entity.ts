@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Festival } from "../festival/festival.entity";
-import { GameType } from "../game-type/game-type.entity";
+import { GameType } from "../gameType/gameType.entity";
 import { Company } from "../company/company.entity";
 
 @Entity("game")
