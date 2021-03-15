@@ -1,6 +1,7 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Game} from "../game/game.entity";
 import {Contact} from "../contact/contact.entity";
+import {CompanyDto} from "./company.dto";
 
 @Entity("company")
 export class Company {
@@ -37,4 +38,15 @@ export class Company {
 
     @OneToMany(() => Contact, contact => contact.company)
     contacts: Contact[];
+
+    static createFromDto(companyDto: CompanyDto): Company {
+        const company: Company = new Company();
+
+        company.name = companyDto.name;
+        company.mail = companyDto.mail;
+        company.address = companyDto.address;
+        company.canBeExhibitor = companyDto.canBeExhibitor;
+
+        return company;
+    }
 }

@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import {GameType} from "../gameType/gameType.entity";
 import {Company} from "../company/company.entity";
+import {GameDto} from "./game.dto";
 
 @Entity("game")
 export class Game {
@@ -37,7 +38,7 @@ export class Game {
 
     @ManyToOne(() => GameType, type => type.games)
     @JoinColumn({name: "id_game_type"})
-    type: GameType;
+    type: GameType | number;
 
     @Column("text", {name: "manual_game"})
     manual: string
@@ -47,5 +48,24 @@ export class Game {
 
     @ManyToOne(() => Company)
     @JoinColumn({name: "id_editor"})
-    editor: Company
+    editor: Company | number
+
+    static createFromDto(gameDto: GameDto): Game {
+        const game: Game = new Game();
+
+        game.name = gameDto.name;
+        game.minNumberPlayer = gameDto.minNumberPlayer;
+        game.maxNumberPlayer = gameDto.maxNumberPlayer;
+        game.duration = gameDto.duration;
+        game.isPrototype = gameDto.isPrototype;
+        game.type = gameDto.type;
+        game.manual = gameDto.manual;
+        game.imageUrl = gameDto.imageUrl;
+        game.editor = gameDto.editor;
+
+        return game;
+    }
+
+
+    
 }

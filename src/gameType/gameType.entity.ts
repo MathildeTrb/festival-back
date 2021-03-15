@@ -1,5 +1,6 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Game} from "../game/game.entity";
+import {GameTypeDto} from "./gameType.dto";
 
 @Entity('game_type')
 export class GameType {
@@ -12,4 +13,12 @@ export class GameType {
 
     @OneToMany(() => Game, game => game.type)
     games: Game[];
+
+    static createFromDto(gameTypeDto: GameTypeDto): GameType {
+        const gameType: GameType = new GameType();
+
+        gameType.label = gameTypeDto.label;
+
+        return gameType;
+    }
 }
