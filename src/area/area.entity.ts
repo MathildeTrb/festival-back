@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {Festival} from "../festival/festival.entity";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 
@@ -12,7 +12,7 @@ export class Area {
     label: string;
 
     @ManyToOne(() => Festival)
-    @Column("int", {name: "id_festival"})
+    @JoinColumn({name: "id_festival"})
     festival: Festival;
 
     @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.area)

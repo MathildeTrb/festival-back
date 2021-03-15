@@ -1,16 +1,16 @@
-import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import {Reservation} from "../reservation/reservation.entity";
 import {Space} from "../space/space.entity";
 
 @Entity("reservation_details")
 export class ReservationDetails {
 
-    @ManyToOne(() => Reservation)
-    @PrimaryColumn("int", {name: "id_reservation"})
+    @ManyToOne(() => Reservation, {primary: true})
+    @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
-    @ManyToOne(() => Space)
-    @PrimaryColumn("int", {name: "id_space"})
+    @ManyToOne(() => Space, {primary: true})
+    @JoinColumn( {name: "id_space"})
     space: Space;
 
     @Column("double", {name: "table_reserved_number"})

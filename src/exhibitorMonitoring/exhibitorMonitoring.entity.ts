@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import {Company} from "../company/company.entity";
 import {Festival} from "../festival/festival.entity";
 import {ExhibitorMonitoringStatus} from "../exhibitorMonitoringStatus/exhibitorMonitoringStatus.entity";
@@ -7,19 +7,20 @@ import {Reservation} from "../reservation/reservation.entity";
 @Entity("exhibitor_monitoring")
 export class ExhibitorMonitoring {
 
-    @ManyToOne(() => Company)
-    @PrimaryColumn("int", {name: "id_exhibitor"})
+    @ManyToOne(() => Company, {primary: true})
+    @JoinColumn({name: "id_exhibitor"})
     exhibitor: Company;
 
-    @ManyToOne(() => Festival)
-    @PrimaryColumn("int", {name: "id_festival"})
+    @ManyToOne(() => Festival, {primary: true})
+    @JoinColumn({name: "id_festival"})
     festival: Festival;
 
     @ManyToOne(() => ExhibitorMonitoringStatus)
-    @Column("int", {name: "id_exhibitor_monitoring_status"})
+    @JoinColumn({name: "id_exhibitor_monitoring_status"})
     status: ExhibitorMonitoringStatus;
 
     @ManyToOne(() => Reservation)
+    @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
     @Column("datetime", {name: "date_contact_1"})

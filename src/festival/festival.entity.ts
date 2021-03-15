@@ -14,7 +14,7 @@ export class Festival {
 
     @Column({
       name: "is_current",
-      default: false
+      default: true
     })
     isCurrent: boolean;
 
