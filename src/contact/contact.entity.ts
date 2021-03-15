@@ -42,5 +42,5 @@ export class Contact {
 
     @ManyToOne(() => Company)
     @Column("int", {name: "id_company"})
-    company: Company
+    company: Company | number
 }
