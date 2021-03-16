@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { FestivalService } from "./festival.service";
 import { SpaceDto } from "../space/space.dto";
@@ -13,12 +13,30 @@ export class FestivalController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('create')
-  async addFestival(
+  @Post()
+  async create(
     @Body("festival") festival: FestivalDto,
     @Body("spaces") spaces: SpaceDto[])
   {
-    return await this.festivalService.addFestival(festival, spaces);
+    return await this.festivalService.create(festival, spaces);
   }
 
+  @Get()
+  async getAll(){
+    return await this.festivalService.getAll();
+  }
+
+  @Get("current")
+  async getCurrent(){
+    return await this.festivalService.getCurrent();
+  }
+
+  @Get(":id")
+  async getById(
+    @Param('id', ParseIntPipe) id: number
+  ){
+    return await this.festivalService.getById(id);
+  }
+
+  //TODO : Update
 }

@@ -12,11 +12,12 @@ export class UserService {
   ) {
   }
 
-  async findOne(mail: string): Promise<User | undefined> {
+  //used in auth
+  async getByMail(mail: string) {
     return this.userRepository.findOne({ where: { mail } });
   }
 
-  async addUser(newUser: UserDto) {
+  async create(newUser: UserDto) {
     const user: User = new User();
     const saltOrRounds = await bcrypt.genSalt();
     user.firstname = newUser.firstname;
@@ -24,5 +25,13 @@ export class UserService {
     user.mail = newUser.mail;
     user.password = await bcrypt.hash(newUser.password, saltOrRounds);
     return this.userRepository.save(user);
+  }
+
+  async getAll() {
+    return this.userRepository.find();
+  }
+
+  async getById(id: number) {
+    return this.userRepository.findOne(id)
   }
 }

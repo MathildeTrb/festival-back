@@ -11,9 +11,9 @@ export class SpaceService {
     private spaceRepository: Repository<Space>
   ) {}
 
-  async addSpace(festival : Festival, newSpace: SpaceDto){
+  async create(festival : Festival, newSpace: SpaceDto){
     const space : Space = Space.createFromDto(festival, newSpace)
-    return await this.spaceRepository.save(space)
+    return this.spaceRepository.save(space)
   }
 
 }

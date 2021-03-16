@@ -16,7 +16,7 @@ export class FestivalService {
   ) {
   }
 
-  async addFestival(newFestival: FestivalDto, newSpaces: SpaceDto[]) {
+  async create(newFestival: FestivalDto, newSpaces: SpaceDto[]) {
 
     const festival: Festival = new Festival();
     festival.name = newFestival.name;
@@ -28,14 +28,31 @@ export class FestivalService {
     const savedFestival: Festival = await this.festivalRepository.save(festival);
 
     for (const space of newSpaces) {
-       await this.spaceService.addSpace(savedFestival, space);
+      await this.spaceService.create(savedFestival, space);
     }
 
     return savedFestival;
   }
 
   async synchronizeFestival() {
-    return this.festivalRepository.update({ isCurrent: true }, { isCurrent: false });
+    return this.festivalRepository.update(
+      { isCurrent: true },
+      { isCurrent: false }
+      );
+  }
+
+  async getAll() {
+    return this.festivalRepository.find();
+  }
+
+  async getCurrent() {
+    return this.festivalRepository.findOne(
+      {where : {isCurrent: true}
+      })
+  }
+
+  async getById(id: number) {
+    return this.festivalRepository.findOne(id)
   }
 
 }
