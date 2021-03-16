@@ -1,18 +1,19 @@
-import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import {User} from "../user/user.entity";
 import {Reservation} from "../reservation/reservation.entity";
 import {GameMonitoringStatus} from "../gameMonitoringStatus/gameMonitoringStatus.entity";
 import {Area} from "../area/area.entity";
+import { Game } from "../game/game.entity";
 
 @Entity("game_monitoring")
 export class GameMonitoring {
 
-    @ManyToOne(() => GameMonitoring)
-    @PrimaryColumn("int", {name: "id_game"})
-    game: User;
+    @ManyToOne(() => Game, {primary: true})
+    @JoinColumn({name: "id_game"})
+    game: Game;
 
-    @ManyToOne(() => Reservation)
-    @PrimaryColumn("int", {name: "id_reservation"})
+    @ManyToOne(() => Reservation, {primary: true})
+    @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
     @Column({name: "quantity_exposed"})
@@ -40,10 +41,10 @@ export class GameMonitoring {
     returnedPrice: number
 
     @ManyToOne(() => GameMonitoringStatus, gameMonitoringStatus => gameMonitoringStatus.gameMonitorings)
-    @Column("int", {name: "id_game_monitoring_status"})
+    @JoinColumn({name: "id_game_monitoring_status"})
     status: GameMonitoringStatus
 
     @ManyToOne(() => Area, area => area.gameMonitorings)
-    @Column("int", {name: "id_area"})
+    @JoinColumn({name: "id_area"})
     area: Area
 }

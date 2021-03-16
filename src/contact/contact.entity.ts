@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import {Company} from "../company/company.entity";
 
 @Entity("contact")
@@ -41,6 +41,6 @@ export class Contact {
     isDeleted: boolean;
 
     @ManyToOne(() => Company)
-    @Column("int", {name: "id_company"})
-    company: Company | number
+    @JoinColumn({name: "id_company"})
+    company: Company
 }

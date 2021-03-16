@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import {GameType} from "../gameType/gameType.entity";
 import {Company} from "../company/company.entity";
 import {GameDto} from "./game.dto";
@@ -37,7 +37,7 @@ export class Game {
     isDeleted: boolean;
 
     @ManyToOne(() => GameType, type => type.games)
-    @Column("int", {name: "id_game_type"})
+    @JoinColumn({name: "id_game_type"})
     type: GameType | number;
 
     @Column("text", {name: "manual_game"})
@@ -47,7 +47,7 @@ export class Game {
     imageUrl: string
 
     @ManyToOne(() => Company)
-    @Column("int", {name: "id_editor"})
+    @JoinColumn({name: "id_editor"})
     editor: Company | number
 
     static createFromDto(gameDto: GameDto): Game {
@@ -67,4 +67,5 @@ export class Game {
     }
 
 
+    
 }
