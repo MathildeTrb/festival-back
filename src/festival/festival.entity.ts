@@ -2,6 +2,7 @@ import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} fro
 import {Area} from "../area/area.entity";
 import {Space} from "../space/space.entity";
 import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
+import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 
 @Entity("festival")
 export class Festival {

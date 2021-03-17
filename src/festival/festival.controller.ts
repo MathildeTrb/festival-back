@@ -4,7 +4,7 @@ import { FestivalService } from "./festival.service";
 import { SpaceDto } from "../space/space.dto";
 import { FestivalDto } from "./festival.dto";
 
-@Controller('festival')
+@Controller('festivals')
 export class FestivalController {
 
   constructor(
@@ -36,6 +36,11 @@ export class FestivalController {
     @Param('id', ParseIntPipe) id: number
   ){
     return await this.festivalService.getById(id);
+  }
+
+  @Get(":id/gameMonitorings")
+  async getWithGameMonitoringsById(@Param("id", ParseIntPipe) id: number) {
+    return await this.festivalService.getWithGameMonitoringsById(id);
   }
 
   //TODO : Update

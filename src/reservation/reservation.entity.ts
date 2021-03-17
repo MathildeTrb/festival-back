@@ -1,4 +1,4 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {ReservationDetails} from "../reservationDetails/reservationDetails.entity";
 import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
@@ -21,17 +21,23 @@ export class Reservation {
     @Column("double", {name: "discount_reservation"})
     discount: number;
 
-    @Column("datetime", {name: "mailing_date_reservation"})
+    @Column("datetime", {
+        name: "mailing_date_reservation",
+        nullable: true
+    })
     mailingDate: Date;
 
-    @Column("datetime", {name: "payment_date_reservation"})
+    @Column("datetime", {
+        name: "payment_date_reservation",
+        nullable: true
+    })
     paymentDate: Date;
 
     @OneToMany(() => ReservationDetails, reservationDetails => reservationDetails.reservation)
     reservationDetails: ReservationDetails[]
 
-    @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.reservation)
-    exhibitorMonitorings: ExhibitorMonitoring[]
+    @OneToOne(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.reservation)
+    exhibitorMonitoring: ExhibitorMonitoring
 
     @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.reservation)
     gameMonitorings: GameMonitoring[]

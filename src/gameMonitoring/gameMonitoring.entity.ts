@@ -47,4 +47,6 @@ export class GameMonitoring {
     @ManyToOne(() => Area, area => area.gameMonitorings)
     @JoinColumn({name: "id_area"})
     area: Area
+
+
 }

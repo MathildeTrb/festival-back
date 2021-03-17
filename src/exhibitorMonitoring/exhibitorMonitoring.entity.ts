@@ -19,7 +19,7 @@ export class ExhibitorMonitoring {
     @JoinColumn({name: "id_exhibitor_monitoring_status"})
     status: ExhibitorMonitoringStatus;
 
-    @ManyToOne(() => Reservation)
+    @ManyToOne(() => Reservation, reservation => reservation.exhibitorMonitoring)
     @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
