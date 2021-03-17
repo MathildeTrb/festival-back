@@ -19,10 +19,16 @@ export class Contact {
     })
     mail: string;
 
-    @Column({name: "mobile_phone_number_contact"})
+    @Column({
+        name: "mobile_phone_number_contact",
+        nullable: true
+    })
     mobilePhoneNumber: string;
 
-    @Column({name: "fix_phone_number_contact"})
+    @Column({
+        name: "fix_phone_number_contact",
+        nullable: true
+    })
     fixPhoneNumber: string;
 
     @Column({name: "job_contact"})

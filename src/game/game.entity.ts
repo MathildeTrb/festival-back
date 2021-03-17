@@ -40,10 +40,16 @@ export class Game {
     @JoinColumn({name: "id_game_type"})
     type: GameType | number;
 
-    @Column("text", {name: "manual_game"})
+    @Column("text", {
+        name: "manual_game",
+        nullable: true
+    })
     manual: string
 
-    @Column({name: "image_url_game"})
+    @Column({
+        name: "image_url_game",
+        nullable: true
+    })
     imageUrl: string
 
     @ManyToOne(() => Company)
@@ -67,5 +73,5 @@ export class Game {
     }
 
 
-    
+
 }
