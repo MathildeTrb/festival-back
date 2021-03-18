@@ -7,6 +7,7 @@ export class GameDto {
     name: string;
     minNumberPlayer: number;
     maxNumberPlayer: number;
+    minYearPlayer: number;
     duration: number;
     isPrototype: boolean;
     type: number;
