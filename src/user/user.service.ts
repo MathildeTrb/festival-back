@@ -35,8 +35,8 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
 
-  async delete(user) {
-    return this.userRepository.delete(user.id);
+  async delete(id: number) {
+    return this.userRepository.delete(id);
   }
 
   async updateAccount(newUser: UserDto) {

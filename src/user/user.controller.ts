@@ -5,7 +5,6 @@ import { LocalAuthGuard } from "../auth/local-auth.guard";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { User } from "./user.decorator";
 import { UserDto } from "./user.dto";
-import { User as UserEntity } from "./user.entity";
 
 
 @Controller("users")
@@ -49,7 +48,15 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Delete()
   async deleteProfilByToken(@User() user) {
-    return await this.userService.delete(user);
+    return await this.userService.delete(user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(":id")
+  async deleteProfilById(
+    @Param("id", ParseIntPipe) id : number
+  ){
+    return await this.userService.delete(id);
   }
 
   @Put("account")
