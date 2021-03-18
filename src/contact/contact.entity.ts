@@ -48,5 +48,5 @@ export class Contact {
 
     @ManyToOne(() => Company)
     @JoinColumn({name: "id_company"})
-    company: Company
+    company: Company | number
 }
