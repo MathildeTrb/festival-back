@@ -19,4 +19,8 @@ export class GameService {
 
         return this.gameRepository.save(game);
     }
+
+    async delete(id: number) {
+        return this.gameRepository.setUnavailable(id);
+    }
 }

@@ -1,5 +1,5 @@
 import {GameService} from "./game.service";
-import {Body, Controller, Get, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post} from "@nestjs/common";
 import {GameDto} from "./game.dto";
 
 @Controller("games")
@@ -15,5 +15,10 @@ export class GameController {
     @Post()
     async create(@Body("game") game: GameDto) {
         return await this.gameService.create(game)
+    }
+
+    @Delete(":id")
+    async delete(@Param("id", ParseIntPipe) id: number) {
+        return await this.gameService.delete(id);
     }
 }
