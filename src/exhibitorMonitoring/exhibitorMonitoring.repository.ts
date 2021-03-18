@@ -12,4 +12,12 @@ export class ExhibitorMonitoringRepository extends Repository<ExhibitorMonitorin
         })
     }
 
+    async getByFestival(id:number){
+        return this.find({
+            where: {
+               festival : id
+            }
+        })
+    }
+
 }

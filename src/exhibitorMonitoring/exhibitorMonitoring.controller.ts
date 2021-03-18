@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from "@nestjs/common";
+import {Body, Controller, Get, Param, ParseIntPipe, Post} from "@nestjs/common";
 import {ExhibitorMonitoringService} from "./exhibitorMonitoring.service";
 import {ExhibitorMonitoringDto} from "./exhibitorMonitoring.dto";
 
@@ -19,8 +19,8 @@ export class ExhibitorMonitoringController {
     }
 
 
-    /*@Get(":id")
+    @Get(":id")
     async getByFestival(@Param("id", ParseIntPipe) id: number){
         return await this.exhibitorMonitoringService.getByFestival(id);
-    }*/
+    }
 }

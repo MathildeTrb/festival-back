@@ -4,6 +4,7 @@ import {ExhibitorMonitoringDto} from "./exhibitorMonitoring.dto";
 import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
 
 
+
 @Injectable()
 export class ExhibitorMonitoringService{
 
@@ -26,8 +27,8 @@ export class ExhibitorMonitoringService{
         return this.exhibitorMonitoringRepository.findAll();
     }
 
-    /*async getByFestival(id: number): Promise<Festival>{
+    async getByFestival(id: number): Promise<ExhibitorMonitoring[]>{
         return this.exhibitorMonitoringRepository.getByFestival(id);
-    }*/
+    }
 
 }
