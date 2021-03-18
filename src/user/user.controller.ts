@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Request, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req, Request, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { AuthService } from "../auth/auth.service";
 import { LocalAuthGuard } from "../auth/local-auth.guard";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { User } from "./user.decorator";
 import { UserDto } from "./user.dto";
+import { User as UserEntity } from "./user.entity";
+
 
 @Controller("users")
 export class UserController {
@@ -17,6 +19,7 @@ export class UserController {
   @UseGuards(LocalAuthGuard)
   @Post("login")
   async login(@User() user) {
+    console.log(user);
     return await this.authService.login(user);
   }
 
@@ -36,12 +39,33 @@ export class UserController {
     return await this.userService.getAll();
   }
 
-  @Get(':id')
+  @Get(":id")
   async getById(
-    @Param('id', ParseIntPipe) id: number
-  ){
-    return await this.userService.getById(id)
+    @Param("id", ParseIntPipe) id: number
+  ) {
+    return await this.userService.getById(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  async deleteProfilByToken(@User() user) {
+    return await this.userService.delete(user);
+  }
+
+  @Put("account")
+  async updateProfil(
+    @Body("user") user
+  ) {
+    const userUpdated = await this.userService.updateAccount(user);
+    const { password, ...result } = userUpdated;
+    return result;
+  }
+
+  @Put("password")
+  async updatePassword(
+    @Body('passwordManaged') passwordManaged
+  ){
+    return await this.userService.updatePassword(passwordManaged)
+  }
 
 }
