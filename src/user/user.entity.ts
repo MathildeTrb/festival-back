@@ -1,4 +1,7 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { UserDto } from "./user.dto";
+import * as bcrypt from 'bcrypt'
+import { Inject } from "@nestjs/common";
 
 @Entity("user")
 export class User {
@@ -32,4 +35,14 @@ export class User {
       default: false
     })
     isAdmin: boolean;
+
+    static async createFromDto(userDto: UserDto) {
+        const user: User = new User();
+        const saltOrRounds = await bcrypt.genSalt();
+        user.firstname = userDto.firstname;
+        user.lastname = userDto.lastname;
+        user.mail = userDto.mail;
+        user.password = await bcrypt.hash(userDto.password, saltOrRounds);
+        return user;
+    }
 }

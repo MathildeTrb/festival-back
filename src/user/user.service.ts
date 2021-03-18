@@ -18,20 +18,57 @@ export class UserService {
   }
 
   async create(newUser: UserDto) {
-    const user: User = new User();
-    const saltOrRounds = await bcrypt.genSalt();
-    user.firstname = newUser.firstname;
-    user.lastname = newUser.lastname;
-    user.mail = newUser.mail;
-    user.password = await bcrypt.hash(newUser.password, saltOrRounds);
+    const user: User = await User.createFromDto(newUser);
     return this.userRepository.save(user);
   }
 
   async getAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      order: {
+        lastname: "ASC",
+        firstname: "ASC"
+      }
+    });
   }
 
   async getById(id: number) {
-    return this.userRepository.findOne(id)
+    return this.userRepository.findOne(id);
+  }
+
+  async delete(user) {
+    return this.userRepository.delete(user.id);
+  }
+
+  async updateAccount(newUser: UserDto) {
+    await this.userRepository.update(
+      { id: newUser.id },
+      {
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+        mail: newUser.mail
+      }
+    );
+    return this.userRepository.findOne(newUser.id);
+  }
+
+  async updatePassword(passwordManaged) {
+    console.log(passwordManaged)
+    const { id, oldPassword, newPassword } = passwordManaged;
+    const user = await this.userRepository.findOne(id)
+    console.log(user.password)
+    console.log(user)
+    console.log(oldPassword)
+    if(user && await bcrypt.compare(oldPassword, user.password)){
+      const saltOrRounds = await bcrypt.genSalt();
+      console.log(saltOrRounds)
+      console.log(newPassword)
+      const savedPassword = await bcrypt.hash(newPassword, saltOrRounds)
+      await this.userRepository.update(
+        {id: user.id},
+        {password: savedPassword}
+        )
+      return true;
+    }
+    return false;
   }
 }
