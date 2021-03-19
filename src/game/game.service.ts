@@ -20,6 +20,10 @@ export class GameService {
         return this.gameRepository.save(game);
     }
 
+    async update(gameDto: GameDto) {
+        return this.gameRepository.update({ id: gameDto.id }, gameDto);
+    }
+
     async delete(id: number) {
         return this.gameRepository.setUnavailable(id);
     }
