@@ -17,18 +17,31 @@ export class ExhibitorMonitoring {
 
     @ManyToOne(() => ExhibitorMonitoringStatus)
     @JoinColumn({name: "id_exhibitor_monitoring_status"})
+    @Column("int", {
+        name: "id_exhibitor_monitoring_status",
+        default: 1
+    })
     status: ExhibitorMonitoringStatus;
 
     @ManyToOne(() => Reservation, reservation => reservation.exhibitorMonitoring)
     @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
-    @Column("datetime", {name: "date_contact_1"})
+    @Column("datetime", {
+        name: "date_contact_1",
+        nullable: true
+    })
     dateContact1: Date;
 
-    @Column("datetime", {name: "date_contact_2"})
+    @Column("datetime", {
+        name: "date_contact_2",
+        nullable: true
+    })
     dateContact2: Date;
 
-    @Column("datetime", {name: "date_contact_3"})
+    @Column("datetime", {
+        name: "date_contact_3",
+        nullable: true
+    })
     dateContact3: Date;
 }

@@ -4,10 +4,11 @@ import { FestivalController } from './festival.controller';
 import { festivalProviders } from "./festival.providers";
 import { FestivalService } from "./festival.service";
 import { SpaceModule } from "../space/space.module";
-import { SpaceService } from "../space/space.service";
+import { CompanyModule } from "../company/company.module";
+import { ExhibitorMonitoringModule } from "../exhibitorMonitoring/exhibitorMonitoring.module";
 
 @Module({
-  imports: [DatabaseModule, SpaceModule],
+  imports: [DatabaseModule, SpaceModule, CompanyModule, ExhibitorMonitoringModule],
   providers: [
     ...festivalProviders,
     FestivalService

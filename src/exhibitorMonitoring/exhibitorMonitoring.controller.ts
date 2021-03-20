@@ -8,10 +8,11 @@ export class ExhibitorMonitoringController {
     constructor(private readonly exhibitorMonitoringService: ExhibitorMonitoringService ) {
     }
 
-    @Post()
+    // je ne suis pas sur quelle soit utile, à voir mais dans tous les cas il n'y a pas d'exhibitor monitoring dto
+/*    @Post()
     async create(@Body("exhibitorMonitoring") exhibitorMonitoring : ExhibitorMonitoringDto){
-        return this.exhibitorMonitoringService.create(exhibitorMonitoring)
-    }
+        return await this.exhibitorMonitoringService.create(exhibitorMonitoring)
+    }*/
 
     @Get()
     async getAll(){
