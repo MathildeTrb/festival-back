@@ -10,7 +10,8 @@ import {CompanyController} from "./company.controller";
         ...companyProviders,
         CompanyService
     ],
-    controllers: [CompanyController]
+    controllers: [CompanyController],
+    exports: [CompanyService]
 })
 
 export class CompanyModule {}

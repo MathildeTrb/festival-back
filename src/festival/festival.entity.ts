@@ -1,33 +1,39 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import {Area} from "../area/area.entity";
-import {Space} from "../space/space.entity";
-import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
-import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Area } from "../area/area.entity";
+import { Space } from "../space/space.entity";
+import { ExhibitorMonitoring } from "../exhibitorMonitoring/exhibitorMonitoring.entity";
+import { GameMonitoring } from "../gameMonitoring/gameMonitoring.entity";
 
 @Entity("festival")
 export class Festival {
 
-    @PrimaryGeneratedColumn({name: "id_festival"})
-    id: number;
+  @PrimaryGeneratedColumn({ name: "id_festival" })
+  id: number;
 
-    @Column({name: "name_festival"})
-    name: string;
+  @Column({ name: "name_festival" })
+  name: string;
 
-    @Column({
-      name: "is_current",
-      default: true
-    })
-    isCurrent: boolean;
+  @Column("text", { name: "description_festival" })
+  description: string;
 
-    @CreateDateColumn({name: "creation_date_festival"})
-    creationDate: Date
+  @Column({
+    name: "is_current",
+    default: true
+  })
+  isCurrent: boolean;
 
-    @OneToMany(() => Space, space => space.festival)
-    spaces: Space[];
+  @CreateDateColumn({ name: "creation_date_festival" })
+  creationDate: Date;
 
-    @OneToMany(() => Area, area => area.festival)
-    areas: Area[];
+  @Column({ name: "image_url_festival" })
+  imageUrl: string;
 
-    @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.festival)
-    exhibitorMonitorings: ExhibitorMonitoring[];
+  @OneToMany(() => Space, space => space.festival)
+  spaces: Space[];
+
+  @OneToMany(() => Area, area => area.festival)
+  areas: Area[];
+
+  @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.festival)
+  exhibitorMonitorings: ExhibitorMonitoring[];
 }

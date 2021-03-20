@@ -5,11 +5,16 @@ import {FestivalDto} from "./festival.dto";
 import {SpaceDto} from "../space/space.dto";
 import {SpaceService} from "../space/space.service";
 import {FestivalRepository} from "./festival.repository";
+import { Company } from "../company/company.entity";
+import { CompanyService } from "../company/company.service";
+import { ExhibitorMonitoringService } from "../exhibitorMonitoring/exhibitorMonitoring.service";
 
 @Injectable()
 export class FestivalService {
     constructor(
         private readonly spaceService: SpaceService,
+        private readonly companyService: CompanyService,
+        private readonly exhibitorMonitoringService: ExhibitorMonitoringService,
         @Inject("FESTIVAL_REPOSITORY")
         private festivalRepository: FestivalRepository
     ) {
@@ -29,6 +34,12 @@ export class FestivalService {
         for (const space of newSpaces) {
             await this.spaceService.create(savedFestival, space);
         }
+
+        const exhibitors : Company[] = await this.companyService.getAllAvailableExhibitor();
+
+        exhibitors.map(async exhibitor => {
+            await this.exhibitorMonitoringService.create(savedFestival, exhibitor)
+        })
 
         return savedFestival;
     }
