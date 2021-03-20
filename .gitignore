@@ -35,3 +35,4 @@ lerna-debug.log*
 /ormconfig.json
 /bdd.puml
 /src/auth/constants.ts
+/storage.json
