@@ -1,10 +1,10 @@
 import {Connection} from "typeorm";
-import {GameMonitoring} from "./gameMonitoring.entity";
+import {GameMonitoringRepository} from "./gameMonitoring.repository";
 
 export const gameMonitoringProviders = [
     {
         provide: "GAME_MONITORING_REPOSITORY",
-        useFactory: (connection: Connection) => connection.getRepository(GameMonitoring),
+        useFactory: (connection: Connection) => connection.getCustomRepository(GameMonitoringRepository),
         inject: ["DATABASE_CONNECTION"]
     }
 ]
