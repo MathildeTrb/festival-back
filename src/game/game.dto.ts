@@ -2,7 +2,6 @@ import {GameType} from "../gameType/gameType.entity";
 import {Company} from "../company/company.entity";
 
 export class GameDto {
-
     id?:number;
     name: string;
     minNumberPlayer: number;

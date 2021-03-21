@@ -19,9 +19,9 @@ export class ExhibitorMonitoringController {
         return await this.exhibitorMonitoringService.getAll();
     }
 
-
     @Get(":id")
     async getByFestival(@Param("id", ParseIntPipe) id: number){
         return await this.exhibitorMonitoringService.getByFestival(id);
     }
+
 }
