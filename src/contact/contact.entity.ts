@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import {Company} from "../company/company.entity";
+import {ContactDto} from "./contact.dto";
 
 @Entity("contact")
 export class Contact {
@@ -40,13 +41,23 @@ export class Contact {
     })
     isImportant: boolean;
 
-    @Column({
-        name: "is_deleted",
-        default: false
-    })
-    isDeleted: boolean;
-
     @ManyToOne(() => Company)
     @JoinColumn({name: "id_company"})
     company: Company | number
+
+    static createFromDto(contactDto: ContactDto): Contact {
+
+        const contact: Contact = new Contact();
+
+        contact.lastname = contactDto.lastname;
+        contact.firstname = contactDto.firstname;
+        contact.mail = contactDto.mail;
+        contact.job = contactDto.job;
+        contact.mobilePhoneNumber = contactDto.mobilePhoneNumber;
+        contact.fixPhoneNumber = contactDto.fixPhoneNumber;
+        contact.isImportant = contactDto.isImportant;
+        contact.company = contactDto.company;
+
+        return contact;
+    }
 }
