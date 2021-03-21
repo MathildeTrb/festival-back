@@ -10,4 +10,10 @@ export class SpaceController {
     async getAll(){
         return await this.spaceService.getAll();
     }
+
+    /*
+    @Post()
+    async create(@Body("space") space: SpaceDto){
+        return this.spaceService.create(space)
+    }*/
 }

@@ -17,5 +17,12 @@ export class SpaceService {
     return this.spaceRepository.save(space)
   }
 
+  async getAll() : Promise<Space[]>{
+    return this.spaceRepository.find({
+      order: {
+        label: "ASC"
+      }
+    })
+  }
 }
 
