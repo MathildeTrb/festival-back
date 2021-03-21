@@ -1,13 +1,13 @@
-import {Controller, Get} from '@nestjs/common';
+import {Controller, Get, Param, ParseIntPipe} from '@nestjs/common';
 import {SpaceService} from "./space.service";
 
-@Controller('space')
+@Controller('spaces')
 export class SpaceController {
 
     constructor(private readonly spaceService: SpaceService) {}
 
-    @Get()
-    async getAll(){
-        return await this.spaceService.getAll();
+    @Get(":id")
+    async getAll(@Param("id", ParseIntPipe) id: number) {
+        return await this.spaceService.getAll(id);
     }
 }

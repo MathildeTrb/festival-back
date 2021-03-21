@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
+import {Body, Controller, Post, Put} from "@nestjs/common";
 import {GameMonitoringService} from "./gameMonitoring.service";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 

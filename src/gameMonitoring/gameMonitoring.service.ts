@@ -1,8 +1,5 @@
 import {Inject, Injectable} from "@nestjs/common";
 import {GameMonitoringRepository} from "./gameMonitoring.repository";
-import {Reservation} from "../reservation/reservation.entity";
-import {Game} from "../game/game.entity";
-import {Area} from "../area/area.entity";
 import {GameMonitoring} from "./gameMonitoring.entity";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 
