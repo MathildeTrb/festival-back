@@ -25,4 +25,8 @@ export class GameRepository extends Repository<Game> {
         })
     }
 
+    async setUnavailable(id: number) {
+        return this.update({ id }, { isDeleted: true })
+    }
+
 }

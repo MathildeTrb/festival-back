@@ -38,10 +38,11 @@ export class FestivalController {
     return await this.festivalService.getById(id);
   }
 
+/*
   @Get(":id/gameMonitorings")
   async getWithGameMonitoringsById(@Param("id", ParseIntPipe) id: number) {
     return await this.festivalService.getWithGameMonitoringsById(id);
-  }
+  }*/
 
   //TODO : Update
 }

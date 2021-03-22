@@ -40,6 +40,7 @@ export class Company {
     contacts: Contact[];
 
     static createFromDto(companyDto: CompanyDto): Company {
+
         const company: Company = new Company();
 
         company.name = companyDto.name;

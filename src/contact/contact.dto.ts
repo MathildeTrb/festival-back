@@ -10,5 +10,5 @@ export class ContactDto{
     job: string;
     isImportant: boolean;
     isDeleted: boolean;
-    company: number;
+    company: Company;
 }

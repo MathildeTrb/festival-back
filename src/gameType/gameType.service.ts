@@ -16,6 +16,14 @@ export class GameTypeService {
         return this.gameTypeRepository.save(gameType);
     }
 
+    async getAll(): Promise<GameType[]> {
+        return this.gameTypeRepository.find({
+            order: {
+                label: "ASC"
+            }
+        });
+    }
+
 
 
 }

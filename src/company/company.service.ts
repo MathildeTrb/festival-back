@@ -1,37 +1,43 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { Company } from "./company.entity";
-import { CompanyRepository } from "./company.repository";
-import { CompanyDto } from "./company.dto";
+import {Inject, Injectable} from "@nestjs/common";
+import {Company} from "./company.entity";
+import {CompanyRepository} from "./company.repository";
+import {CompanyDto} from "./company.dto";
 
 @Injectable()
 export class CompanyService {
 
-  @Inject("COMPANY_REPOSITORY")
-  private readonly companyRepository: CompanyRepository;
+    @Inject("COMPANY_REPOSITORY")
+    private readonly companyRepository: CompanyRepository;
 
-  async getAllAvailable(): Promise<Company[]> {
-    return this.companyRepository.findAvailable();
-  }
+    async getAllAvailable(): Promise<Company[]> {
+        const companies = await this.companyRepository.findAvailable();
 
-  async getAll(): Promise<Company[]> {
-    return this.companyRepository.findAll();
-  }
+        companies.forEach(company => {
+            company.games = company.games.filter(game => !game.isDeleted)
+        })
 
-  async create(companyDto: CompanyDto) {
+        return companies;
+    }
 
-    const company: Company = Company.createFromDto(companyDto);
+    async getAll(): Promise<Company[]> {
+        return this.companyRepository.findAll();
+    }
 
-    return this.companyRepository.save(company);
-  }
+    async create(companyDto: CompanyDto) {
 
-  async getAllAvailableExhibitor() {
-    return this.companyRepository.find({
-      where: {
-        isDeleted: false,
-        canBeExhibitor: true
-      }
-    });
-  }
+        const company: Company = Company.createFromDto(companyDto);
+
+        return this.companyRepository.save(company);
+    }
+
+    async getAllAvailableExhibitor() {
+        return this.companyRepository.find({
+            where: {
+                isDeleted: false,
+                canBeExhibitor: true
+            }
+        });
+    }
 }
 
 
