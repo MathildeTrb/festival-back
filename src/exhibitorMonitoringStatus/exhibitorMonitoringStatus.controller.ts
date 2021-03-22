@@ -13,7 +13,7 @@ export class ExhibitorMonitoringStatusController {
     }
 
     @Get()
-    async getAll(){
+    async getAll() {
         return await this.exhibitorMonitoringStatusService.getAll();
     }
 

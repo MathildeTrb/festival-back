@@ -9,6 +9,10 @@ export class GameMonitoringStatusService {
     private readonly gameMonitoringStatusRepository: Repository<GameMonitoringStatus>
 
     async getAll(): Promise<GameMonitoringStatus[]> {
-        return this.gameMonitoringStatusRepository.find();
+        return this.gameMonitoringStatusRepository.find({
+            order: {
+                label: "ASC"
+            }
+        });
     }
 }

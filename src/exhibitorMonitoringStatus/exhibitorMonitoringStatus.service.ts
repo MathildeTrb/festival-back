@@ -7,16 +7,18 @@ import {ExhibitorMonitoringStatusDto} from "./exhibitorMonitoringStatus.dto";
 export class ExhibitorMonitoringStatusService {
 
     @Inject("EXHIBITOR_MONITORING_STATUS_REPOSITORY")
-    private readonly exhibitorMonitoringStatusRepository : Repository<ExhibitorMonitoringStatus>
+    private readonly exhibitorMonitoringStatusRepository: Repository<ExhibitorMonitoringStatus>
 
-    async create(newEMS : ExhibitorMonitoringStatusDto){
-        const EMS : ExhibitorMonitoringStatus = new ExhibitorMonitoringStatus();
-        EMS.exhibitorMonitorings = newEMS.exhibitorMonitorings;
-        EMS.id = newEMS.id;
-        EMS.label = newEMS.label
+    async create(exhibitorMonitoringStatusDto: ExhibitorMonitoringStatusDto) {
+
+        const exhibitorMonitoringStatus = new ExhibitorMonitoringStatus();
+
+        exhibitorMonitoringStatus.label = exhibitorMonitoringStatusDto.label;
+
+        return this.exhibitorMonitoringStatusRepository.save(exhibitorMonitoringStatus);
     }
 
-    async getAll() : Promise<ExhibitorMonitoringStatus[]>{
+    async getAll(): Promise<ExhibitorMonitoringStatus[]> {
         return this.exhibitorMonitoringStatusRepository.find({
             order: {
                 label: "ASC"
