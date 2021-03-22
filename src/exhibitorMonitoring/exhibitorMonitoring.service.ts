@@ -26,11 +26,11 @@ export class ExhibitorMonitoringService{
     }
 
     async getByFestival(id: number): Promise<ExhibitorMonitoring[]>{
-        return await this.exhibitorMonitoringRepository.getByFestival(id);
+        return this.exhibitorMonitoringRepository.getByFestival(id);
     }
 
     async updateDate(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
-        return await this.exhibitorMonitoringRepository.update(
+        return this.exhibitorMonitoringRepository.update(
           {
               exhibitor: exhibitorMonitoringDto.exhibitor,
               festival: exhibitorMonitoringDto.festival
@@ -48,5 +48,14 @@ export class ExhibitorMonitoringService{
               relations:["festival", "status", "exhibitor", "reservation"]
           }
         )
+    }
+
+    async updateStatus(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
+        return this.exhibitorMonitoringRepository.update({
+            exhibitor: exhibitorMonitoringDto.exhibitor,
+            festival: exhibitorMonitoringDto.festival
+        }, {
+            status: exhibitorMonitoringDto.status
+        })
     }
 }

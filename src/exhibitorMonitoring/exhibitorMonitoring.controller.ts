@@ -30,4 +30,9 @@ export class ExhibitorMonitoringController {
         return await this.exhibitorMonitoringService.updateDate(exhibitorMonitoringDto);
     }
 
+    @Put()
+    async updateStatus(@Body('exhibitorMonitoring') exhibitorMonitoringDto: ExhibitorMonitoringDto){
+        return await this.exhibitorMonitoringService.updateStatus(exhibitorMonitoringDto);
+    }
+
 }
