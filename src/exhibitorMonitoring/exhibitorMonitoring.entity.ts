@@ -15,7 +15,7 @@ export class ExhibitorMonitoring {
     @JoinColumn({name: "id_festival"})
     festival: Festival;
 
-    @ManyToOne(() => ExhibitorMonitoringStatus)
+    @ManyToOne(() => ExhibitorMonitoringStatus, exhibitorMonitoringStatus => exhibitorMonitoringStatus.exhibitorMonitorings)
     @JoinColumn({name: "id_exhibitor_monitoring_status"})
     @Column("int", {
         name: "id_exhibitor_monitoring_status",
@@ -27,19 +27,19 @@ export class ExhibitorMonitoring {
     @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
-    @Column("datetime", {
+    @Column("date", {
         name: "date_contact_1",
         nullable: true
     })
     dateContact1: Date;
 
-    @Column("datetime", {
+    @Column("date", {
         name: "date_contact_2",
         nullable: true
     })
     dateContact2: Date;
 
-    @Column("datetime", {
+    @Column("date", {
         name: "date_contact_3",
         nullable: true
     })

@@ -16,7 +16,8 @@ export class ExhibitorMonitoringRepository extends Repository<ExhibitorMonitorin
         return this.find({
             where: {
                festival : id
-            }
+            },
+            relations : ["festival", "status", "exhibitor", "reservation"],
         })
     }
 

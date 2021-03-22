@@ -52,16 +52,10 @@ export class UserService {
   }
 
   async updatePassword(passwordManaged) {
-    console.log(passwordManaged)
     const { id, oldPassword, newPassword } = passwordManaged;
     const user = await this.userRepository.findOne(id)
-    console.log(user.password)
-    console.log(user)
-    console.log(oldPassword)
     if(user && await bcrypt.compare(oldPassword, user.password)){
       const saltOrRounds = await bcrypt.genSalt();
-      console.log(saltOrRounds)
-      console.log(newPassword)
       const savedPassword = await bcrypt.hash(newPassword, saltOrRounds)
       await this.userRepository.update(
         {id: user.id},
