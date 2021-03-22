@@ -10,4 +10,10 @@ export class SpaceController {
     async getAll(@Param("id", ParseIntPipe) id: number) {
         return await this.spaceService.getAll(id);
     }
+
+    /*
+    @Post()
+    async create(@Body("space") space: SpaceDto){
+        return this.spaceService.create(space)
+    }*/
 }

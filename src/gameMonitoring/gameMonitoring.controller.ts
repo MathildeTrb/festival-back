@@ -1,4 +1,4 @@
-import {Body, Controller, Post, Put} from "@nestjs/common";
+import {Body, Controller, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
 import {GameMonitoringService} from "./gameMonitoring.service";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 
@@ -16,4 +16,10 @@ export class GameMonitoringController {
     async update(@Body("gameMonitoring") gameM: GameMonitoringDto){
         return await this.gameMonitoringService.update(gameM)
     }
+
+    @Get("festival/:id")
+    async getByFestival(@Param('id',ParseIntPipe) id: number){
+        return await this.gameMonitoringService.getAllByFestival(id)
+    }
 }
+

@@ -7,8 +7,8 @@ import {gameMonitoringProviders} from "./gameMonitoring.providers";
 @Module({
     imports: [DatabaseModule],
     providers: [
-        ...gameMonitoringProviders,
-        GameMonitoringService
+        GameMonitoringService,
+        ...gameMonitoringProviders
     ],
     controllers: [GameMonitoringController]
 })

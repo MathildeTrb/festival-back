@@ -1,5 +1,4 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {Repository} from "typeorm";
 import {Contact} from "./contact.entity";
 import {ContactDto} from "./contact.dto";
 import {ContactRepository} from "./contact.repository";

@@ -8,6 +8,8 @@ import {FestivalRepository} from "./festival.repository";
 import { Company } from "../company/company.entity";
 import { CompanyService } from "../company/company.service";
 import { ExhibitorMonitoringService } from "../exhibitorMonitoring/exhibitorMonitoring.service";
+import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
+import {GameMonitoringRepository} from "../gameMonitoring/gameMonitoring.repository";
 
 @Injectable()
 export class FestivalService {
@@ -16,7 +18,7 @@ export class FestivalService {
         private readonly companyService: CompanyService,
         private readonly exhibitorMonitoringService: ExhibitorMonitoringService,
         @Inject("FESTIVAL_REPOSITORY")
-        private festivalRepository: FestivalRepository
+        private festivalRepository: FestivalRepository,
     ) {
     }
 
@@ -65,8 +67,9 @@ export class FestivalService {
         return this.festivalRepository.findOne(id)
     }
 
-    async getWithGameMonitoringsById(id: number): Promise<Festival> {
-        return this.festivalRepository.findWithGameMonitoringsById(id);
-    }
+  /* async getWithGameMonitoringsById(id: number): Promise<GameMonitoring[]> {
+        return this.gameMonitoringRepository.getAllByFestival(id)
+        //return this.festivalRepository.findWithGameMonitoringsById(id);
+    }*/
 
 }

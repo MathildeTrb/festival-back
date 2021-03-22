@@ -1,7 +1,7 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {GameMonitoringRepository} from "./gameMonitoring.repository";
 import {GameMonitoring} from "./gameMonitoring.entity";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
+import {GameMonitoringRepository} from "./gameMonitoring.repository"
 
 @Injectable()
 export class GameMonitoringService {
@@ -23,6 +23,9 @@ export class GameMonitoringService {
         return this.gameMonitoringRepository.update({reservation: gameMDto.reservation, game: gameMDto.game}, gameMDto)
     }
 
+    async getAllByFestival(id: number) {
+        return this.gameMonitoringRepository.getAllByFestival(id)
+    }
 
 }
 
