@@ -29,7 +29,7 @@ export class ExhibitorMonitoringService{
         return await this.exhibitorMonitoringRepository.getByFestival(id);
     }
 
-    async update(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
+    async updateDate(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
         return await this.exhibitorMonitoringRepository.update(
           {
               exhibitor: exhibitorMonitoringDto.exhibitor,
