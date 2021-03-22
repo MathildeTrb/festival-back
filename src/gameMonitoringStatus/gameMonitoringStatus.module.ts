@@ -1,14 +1,15 @@
 import {Module} from "@nestjs/common";
 import {DatabaseModule} from "../database/database.module";
-import {gameMonitoringProviders} from "../gameMonitoring/gameMonitoring.providers";
-import {GameMonitoringService} from "../gameMonitoring/gameMonitoring.service";
-
+import {gameMonitoringStatusProviders} from "./gameMonitoringStatus.providers";
+import {GameMonitoringStatusService} from "./gameMonitoringStatus.service";
+import {GameMonitoringStatusController} from "./gameMonitoringStatus.controller";
 
 @Module({
     imports: [DatabaseModule],
     providers: [
-        GameMonitoringService,
-        ...gameMonitoringProviders
-    ]
+        ...gameMonitoringStatusProviders,
+        GameMonitoringStatusService
+    ],
+    controllers: [GameMonitoringStatusController]
 })
 export class GameMonitoringStatusModule {}

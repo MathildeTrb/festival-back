@@ -1,14 +1,13 @@
-import {Body, Controller, Post} from "@nestjs/common";
-import {GameMonitoringStatusDto} from "./gameMonitoringStatus.dto";
+import {Controller, Get} from "@nestjs/common";
 import {GameMonitoringStatusService} from "./gameMonitoringStatus.service";
 
 @Controller("gameMonitoringStatus")
-export class GameMonitoringStatusController{
-    constructor(private readonly gameMonitoringStatusService : GameMonitoringStatusService) {
-    }
+export class GameMonitoringStatusController {
 
-    @Post()
-    async create(@Body("gameMonitoringStatus") gameMS : GameMonitoringStatusDto){
-        return this.gameMonitoringStatusService.create(gameMS)
+    constructor(private readonly gameMonitoringStatusService: GameMonitoringStatusService) {}
+
+    @Get()
+    async getAll() {
+        return await this.gameMonitoringStatusService.getAll();
     }
 }
