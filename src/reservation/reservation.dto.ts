@@ -2,7 +2,7 @@ import {ReservationDetails} from "../reservationDetails/reservationDetails.entit
 import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 
-export class reservationDto{
+export class ReservationDto{
     id?:number;
     needVolunteer: boolean;
     willCome: boolean;

@@ -18,14 +18,17 @@ export class GameMonitoringRepository extends Repository<GameMonitoring>{
         })
     }*/
     async getAllByFestival(id:number) : Promise<GameMonitoring[]>{
-        const gm = await this.createQueryBuilder("gameMonitoring")
-            .select("gameMonitoring.isPlaced" )
+        const gameMonitorings = await this.createQueryBuilder("gameMonitoring")
+            //.select("gameMonitoring" )
+            .leftJoinAndSelect("gameMonitoring.game", "game")
+            .leftJoinAndSelect("gameMonitoring.status", "status")
+            .leftJoinAndSelect("gameMonitoring.area", "area")
             .leftJoinAndSelect("gameMonitoring.reservation", "reservation")
             .leftJoinAndSelect("reservation.exhibitorMonitoring", "exhibitorMonitoring")
             .leftJoinAndSelect("exhibitorMonitoring.festival", "festival")
             .where("festival.id = :id", {id:id})
             .getMany()
-        return gm
+        return gameMonitorings
     }
 
 }

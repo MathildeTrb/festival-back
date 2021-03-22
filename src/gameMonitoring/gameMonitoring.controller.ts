@@ -17,7 +17,7 @@ export class GameMonitoringController {
         return await this.gameMonitoringService.update(gameM)
     }
 
-    @Get("festival/:id")
+    @Get(":id")
     async getByFestival(@Param('id',ParseIntPipe) id: number){
         return await this.gameMonitoringService.getAllByFestival(id)
     }
