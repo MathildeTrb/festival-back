@@ -1,12 +1,11 @@
-import {forwardRef, Module} from '@nestjs/common';
+import {Module} from '@nestjs/common';
 import {DatabaseModule} from "../database/database.module";
-import {AuthModule} from "../auth/auth.module";
 import {contactProviders} from "./contact.providers";
 import {ContactService} from "./contact.service";
 import {ContactController} from "./contact.controller";
 
 @Module({
-    imports: [DatabaseModule, AuthModule],
+    imports: [DatabaseModule],
     providers: [
         ...contactProviders,
         ContactService

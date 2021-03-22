@@ -20,7 +20,7 @@ export class CompanyRepository extends Repository<Company> {
             order: {
                 name: "ASC"
             },
-            relations: ["contacts", "games"]
+            relations: ["contacts", "games", "games.type"]
         })
     }
 

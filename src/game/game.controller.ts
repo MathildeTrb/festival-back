@@ -7,12 +7,9 @@ import {
     Param,
     ParseIntPipe,
     Post,
-    Put,
-    UploadedFile,
-    UseInterceptors
+    Put
 } from "@nestjs/common";
 import {GameDto} from "./game.dto";
-import {FileInterceptor} from "@nestjs/platform-express";
 
 @Controller("games")
 export class GameController {
@@ -39,11 +36,4 @@ export class GameController {
     async delete(@Param("id", ParseIntPipe) id: number) {
         return await this.gameService.delete(id);
     }
-
-    @Post("photo")
-    @UseInterceptors(FileInterceptor("file"))
-    async uploadFile(@UploadedFile() file) {
-        return this.gameService.uploadFile(file);
-    }
-
 }
