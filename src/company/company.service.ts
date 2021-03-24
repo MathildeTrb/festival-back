@@ -52,6 +52,15 @@ export class CompanyService {
             }
         });
     }
+
+    async getById(id: number) {
+        return this.companyRepository.findOne(id, {
+            relations: [
+                "games",
+                "contacts"
+            ]
+        });
+    }
 }
 
 

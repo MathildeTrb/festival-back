@@ -70,4 +70,26 @@ export class ExhibitorMonitoringService {
             ]
         })
     }
+
+    async getDashboard(idExhibitor: number, idFestival: number): Promise<ExhibitorMonitoring> {
+        return this.exhibitorMonitoringRepository.findOne({
+            where: {
+                exhibitor: idExhibitor,
+                festival: idFestival
+            },
+            relations: [
+                "status",
+                "exhibitor",
+                "exhibitor.games",
+                "exhibitor.contacts",
+                "reservation",
+                "reservation.reservationDetails",
+                "reservation.reservationDetails.space",
+                "reservation.gameMonitorings",
+                "reservation.gameMonitorings.game",
+                "reservation.gameMonitorings.area",
+                "reservation.gameMonitorings.status"
+            ]
+        });
+    }
 }

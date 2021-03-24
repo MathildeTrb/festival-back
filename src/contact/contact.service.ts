@@ -4,10 +4,10 @@ import {ContactDto} from "./contact.dto";
 import {ContactRepository} from "./contact.repository";
 
 @Injectable()
-export class ContactService{
+export class ContactService {
 
     @Inject("CONTACT_REPOSITORY")
-    private readonly contactRepository : ContactRepository
+    private readonly contactRepository: ContactRepository
 
     async create(contactDto: ContactDto) {
 
@@ -24,13 +24,13 @@ export class ContactService{
         return this.contactRepository.delete(id);
     }
 
-   async getCompanyById(id: number): Promise<Contact>{
+    async getCompanyById(id: number): Promise<Contact> {
         return this.contactRepository.findCompanyById(id);
     }
 
-    async getAll(): Promise<Contact[]>{
+    async getAll(): Promise<Contact[]> {
         return this.contactRepository.find({
-            order:{
+            order: {
                 lastname: "ASC"
             }
         });

@@ -29,6 +29,6 @@ export class CompanyController {
 
     @Get(":id")
     async getById(@Param("id", ParseIntPipe) id: number) {
-
+        return await this.companyService.getById(id);
     }
 }
