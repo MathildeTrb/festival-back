@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Festival} from "../festival/festival.entity";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 import {AreaDto} from "./area.dto";
@@ -19,11 +19,11 @@ export class Area {
     @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.area)
     gameMonitorings: GameMonitoring[];
 
-    static createFromDto(areaDto: AreaDto): Area{
-        const area : Area = new Area();
+    static createFromDto(areaDto: AreaDto): Area {
+        const area: Area = new Area();
 
         area.label = areaDto.label;
 
-        return area
+        return area;
     }
 }

@@ -5,11 +5,12 @@ import {FestivalDto} from "./festival.dto";
 import {SpaceDto} from "../space/space.dto";
 import {SpaceService} from "../space/space.service";
 import {FestivalRepository} from "./festival.repository";
-import { Company } from "../company/company.entity";
-import { CompanyService } from "../company/company.service";
-import { ExhibitorMonitoringService } from "../exhibitorMonitoring/exhibitorMonitoring.service";
+import {Company} from "../company/company.entity";
+import {CompanyService} from "../company/company.service";
+import {ExhibitorMonitoringService} from "../exhibitorMonitoring/exhibitorMonitoring.service";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 import {GameMonitoringRepository} from "../gameMonitoring/gameMonitoring.repository";
+import {AreaService} from "../area/area.service";
 
 @Injectable()
 export class FestivalService {
@@ -17,6 +18,7 @@ export class FestivalService {
         private readonly spaceService: SpaceService,
         private readonly companyService: CompanyService,
         private readonly exhibitorMonitoringService: ExhibitorMonitoringService,
+        private readonly areaService: AreaService,
         @Inject("FESTIVAL_REPOSITORY")
         private festivalRepository: FestivalRepository,
     ) {
@@ -37,7 +39,7 @@ export class FestivalService {
             await this.spaceService.create(savedFestival, space);
         }
 
-        const exhibitors : Company[] = await this.companyService.getAllAvailableExhibitor();
+        const exhibitors: Company[] = await this.companyService.getAllAvailableExhibitor();
 
         exhibitors.map(async exhibitor => {
             await this.exhibitorMonitoringService.create(savedFestival, exhibitor)
@@ -59,17 +61,28 @@ export class FestivalService {
 
     async getCurrent() {
         return this.festivalRepository.findOne({
-                where: {isCurrent: true}
-            })
+            where: {
+                isCurrent: true
+            }
+        })
     }
 
     async getById(id: number) {
         return this.festivalRepository.findOne(id)
     }
 
-  /* async getWithGameMonitoringsById(id: number): Promise<GameMonitoring[]> {
-        return this.gameMonitoringRepository.getAllByFestival(id)
-        //return this.festivalRepository.findWithGameMonitoringsById(id);
-    }*/
+    async getCurrentWithGames() {
+        const currentFestival: Festival = await this.getCurrent();
+
+        return {
+            ...currentFestival,
+            areas: await this.areaService.getAllWithGamesByIdFestival(currentFestival.id)
+        }
+    }
+
+    /* async getWithGameMonitoringsById(id: number): Promise<GameMonitoring[]> {
+          return this.gameMonitoringRepository.getAllByFestival(id)
+          //return this.festivalRepository.findWithGameMonitoringsById(id);
+      }*/
 
 }

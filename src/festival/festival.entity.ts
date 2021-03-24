@@ -1,39 +1,41 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Area } from "../area/area.entity";
-import { Space } from "../space/space.entity";
-import { ExhibitorMonitoring } from "../exhibitorMonitoring/exhibitorMonitoring.entity";
-import { GameMonitoring } from "../gameMonitoring/gameMonitoring.entity";
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Area} from "../area/area.entity";
+import {Space} from "../space/space.entity";
+import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
 
 @Entity("festival")
 export class Festival {
 
-  @PrimaryGeneratedColumn({ name: "id_festival" })
-  id: number;
+    @PrimaryGeneratedColumn({name: "id_festival"})
+    id: number;
 
-  @Column({ name: "name_festival" })
-  name: string;
+    @Column({name: "name_festival"})
+    name: string;
 
-  @Column("text", { name: "description_festival" })
-  description: string;
+    @Column("text", {
+        name: "description_festival",
+        nullable: true
+    })
+    description: string;
 
-  @Column({
-    name: "is_current",
-    default: true
-  })
-  isCurrent: boolean;
+    @Column({
+        name: "is_current",
+        default: true
+    })
+    isCurrent: boolean;
 
-  @CreateDateColumn({ name: "creation_date_festival" })
-  creationDate: Date;
+    @CreateDateColumn({name: "creation_date_festival"})
+    creationDate: Date;
 
-  @Column({ name: "image_url_festival" })
-  imageUrl: string;
+    @Column({name: "image_url_festival"})
+    imageUrl: string;
 
-  @OneToMany(() => Space, space => space.festival)
-  spaces: Space[];
+    @OneToMany(() => Space, space => space.festival)
+    spaces: Space[];
 
-  @OneToMany(() => Area, area => area.festival)
-  areas: Area[];
+    @OneToMany(() => Area, area => area.festival)
+    areas: Area[];
 
-  @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.festival)
-  exhibitorMonitorings: ExhibitorMonitoring[];
+    @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.festival)
+    exhibitorMonitorings: ExhibitorMonitoring[];
 }

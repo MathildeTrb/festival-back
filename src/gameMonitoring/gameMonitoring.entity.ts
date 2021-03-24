@@ -1,9 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn} from "typeorm";
 import {User} from "../user/user.entity";
 import {Reservation} from "../reservation/reservation.entity";
 import {GameMonitoringStatus} from "../gameMonitoringStatus/gameMonitoringStatus.entity";
 import {Area} from "../area/area.entity";
-import { Game } from "../game/game.entity";
+import {Game} from "../game/game.entity";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 
 @Entity("game_monitoring")
@@ -49,22 +49,27 @@ export class GameMonitoring {
     @JoinColumn({name: "id_area"})
     area: Area
 
+    @UpdateDateColumn({
+        type: "datetime",
+        name: "date_update"
+    })
+    dateUpdate: Date
 
-    static createFromDto(gameMonitoringDto : GameMonitoringDto): GameMonitoring{
+    static createFromDto(gameMonitoringDto: GameMonitoringDto): GameMonitoring {
 
-        const gameM : GameMonitoring = new GameMonitoring();
+        const gameMonitoring: GameMonitoring = new GameMonitoring();
 
-        gameM.reservation = gameMonitoringDto.reservation;
-        gameM.game = gameMonitoringDto.game;
-        gameM.area = gameMonitoringDto.area;
-        gameM.isPlaced = gameMonitoringDto.isPlaced;
-        gameM.needBeingReturned = gameMonitoringDto.needBeingReturned;
-        gameM.quantityDonation = gameMonitoringDto.quantityDonation;
-        gameM.quantityExposed = gameMonitoringDto.quantityExposed;
-        gameM.quantityTombola = gameMonitoringDto.quantityTombola;
-        gameM.returnedPrice = gameMonitoringDto.returnedPrice;
-        gameM.status = gameMonitoringDto.status;
+        gameMonitoring.reservation = gameMonitoringDto.reservation;
+        gameMonitoring.game = gameMonitoringDto.game;
+        gameMonitoring.area = gameMonitoringDto.area;
+        gameMonitoring.isPlaced = gameMonitoringDto.isPlaced;
+        gameMonitoring.needBeingReturned = gameMonitoringDto.needBeingReturned;
+        gameMonitoring.quantityDonation = gameMonitoringDto.quantityDonation;
+        gameMonitoring.quantityExposed = gameMonitoringDto.quantityExposed;
+        gameMonitoring.quantityTombola = gameMonitoringDto.quantityTombola;
+        gameMonitoring.returnedPrice = gameMonitoringDto.returnedPrice;
+        gameMonitoring.status = gameMonitoringDto.status;
 
-        return gameM;
+        return gameMonitoring;
     }
 }

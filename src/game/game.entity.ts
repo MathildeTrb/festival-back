@@ -62,6 +62,7 @@ export class Game {
         game.name = gameDto.name;
         game.minNumberPlayer = gameDto.minNumberPlayer;
         game.maxNumberPlayer = gameDto.maxNumberPlayer;
+        game.minYearPlayer = gameDto.minYearPlayer;
         game.duration = gameDto.duration;
         game.isPrototype = gameDto.isPrototype;
         game.type = gameDto.type;

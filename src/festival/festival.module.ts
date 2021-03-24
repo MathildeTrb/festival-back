@@ -6,10 +6,10 @@ import { FestivalService } from "./festival.service";
 import { SpaceModule } from "../space/space.module";
 import { CompanyModule } from "../company/company.module";
 import { ExhibitorMonitoringModule } from "../exhibitorMonitoring/exhibitorMonitoring.module";
-import {GameMonitoringModule} from "../gameMonitoring/gameMonitoring.module";
+import {AreaModule} from "../area/area.module";
 
 @Module({
-  imports: [DatabaseModule, SpaceModule, CompanyModule, ExhibitorMonitoringModule],
+  imports: [DatabaseModule, SpaceModule, CompanyModule, ExhibitorMonitoringModule, AreaModule],
   providers: [
     ...festivalProviders,
     FestivalService

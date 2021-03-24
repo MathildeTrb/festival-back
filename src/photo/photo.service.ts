@@ -8,10 +8,15 @@ export class PhotoService {
     async uploadFile(file: any): Promise<string> {
 
         const bucket: Bucket = gcs.bucket("photo_element_festival");
-        const fileToUpload: File = bucket.file(file.originalname);
+
+        const timestamp: number = Date.now();
+
+        const filename: string = `${timestamp}_${file.originalname}`
+
+        const fileToUpload: File = bucket.file(filename);
 
         await fileToUpload.save(file.buffer);
 
-        return `${process.env.BUCKET_URL}/${file.originalname}`
+        return `${process.env.BUCKET_URL}/${filename}`
     }
 }
