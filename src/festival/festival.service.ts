@@ -82,5 +82,4 @@ export class FestivalService {
           return this.gameMonitoringRepository.getAllByFestival(id)
           //return this.festivalRepository.findWithGameMonitoringsById(id);
       }*/
-
 }

@@ -1,8 +1,10 @@
 import {IsBoolean, IsEmail, IsString, Length} from "class-validator";
+import {Contact} from "../contact/contact.entity";
+import {Game} from "../game/game.entity";
 
 export class CompanyDto {
 
-    id?:string;
+    id?:number;
 
     @IsString({
         message: "Nom incorrect"
@@ -30,4 +32,8 @@ export class CompanyDto {
 
     @IsBoolean()
     canBeExhibitor: boolean;
+
+    /*contacts: Contact[];
+
+    games: Game[];*/
 }

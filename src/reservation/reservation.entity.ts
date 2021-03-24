@@ -27,13 +27,13 @@ export class Reservation {
     })
     discount: number;
 
-    @Column("datetime", {
+    @Column("date", {
         name: "mailing_date_reservation",
         nullable: true
     })
     mailingDate: Date;
 
-    @Column("datetime", {
+    @Column("date", {
         name: "payment_date_reservation",
         nullable: true
     })
