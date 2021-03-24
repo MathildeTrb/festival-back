@@ -19,6 +19,7 @@ export class Area {
     @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.area)
     gameMonitorings: GameMonitoring[];
 
+    // Create DTO from dto
     static createFromDto(areaDto: AreaDto): Area {
         const area: Area = new Area();
 
