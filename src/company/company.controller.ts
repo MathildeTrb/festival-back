@@ -13,19 +13,18 @@ export class CompanyController {
     }
 
     @Post()
-    @UsePipes(new ValidationPipe())
     async create(@Body("company") company: CompanyDto) {
         return this.companyService.create(company);
     }
 
     @Put()
     async update(@Body("company") company: CompanyDto) {
-
+        return await this.companyService.update(company);
     }
 
-    @Delete()
-    async delete(@Body("company") company: CompanyDto) {
-
+    @Delete(":id")
+    async delete(@Param("id", ParseIntPipe) id: number) {
+        return await this.companyService.delete(id);
     }
 
     @Get(":id")

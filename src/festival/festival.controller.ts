@@ -12,7 +12,7 @@ export class FestivalController {
     ) {
     }
 
-    @UseGuards(JwtAuthGuard)
+    /*@UseGuards(JwtAuthGuard)*/
     @Post()
     async create(
         @Body("festival") festival: FestivalDto,
