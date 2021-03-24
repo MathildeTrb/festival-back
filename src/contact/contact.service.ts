@@ -17,7 +17,6 @@ export class ContactService{
     }
 
     async update(contactDto: ContactDto) {
-        console.log("JE SUIS DANS LE UPDATE")
         return this.contactRepository.update({id: contactDto.id}, contactDto);
     }
 
