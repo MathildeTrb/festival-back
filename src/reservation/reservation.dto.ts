@@ -1,15 +1,16 @@
-import {ReservationDetails} from "../reservationDetails/reservationDetails.entity";
-import {ExhibitorMonitoring} from "../exhibitorMonitoring/exhibitorMonitoring.entity";
 import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
+import { ReservationDetailsDto } from "../reservationDetails/reservationDetails.dto";
+import { ExhibitorMonitoringDto } from "../exhibitorMonitoring/exhibitorMonitoring.dto";
 
 export class ReservationDto{
     id?:number;
     needVolunteer: boolean;
     willCome: boolean;
     comment: string;
+    discount: number;
     mailingDate: Date;
     paymentDate: Date;
-    reservationsDetails: ReservationDetails[];
-    exhibitorMonitoring: ExhibitorMonitoring;
+    reservationsDetails: ReservationDetailsDto[];
+    exhibitorMonitoring: ExhibitorMonitoringDto;
     gameMonitorings: GameMonitoring[];
 }

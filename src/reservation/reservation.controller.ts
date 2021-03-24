@@ -9,12 +9,11 @@ export class ReservationController{
     constructor(private readonly reservationService : ReservationService) {
     }
 
-    /*@Post()
-    async create(
-        @Body("reservation") reservation: ReservationDto,
-        @Body("festival") festival: FestivalDto,
-        @Body("exhibitorMonitoring") exhibitorMonitoring: ExhibitorMonitoringDto
+    @Post()
+    async create (
+      @Body('reservation') reservation : ReservationDto
     ){
-        return await this.reservationService.create(reservation, exhibitorMonitoring, festival);
-    }*/
+        return await this.reservationService.create(reservation)
+    }
+
 }

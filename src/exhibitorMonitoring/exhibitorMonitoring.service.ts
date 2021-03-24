@@ -30,7 +30,7 @@ export class ExhibitorMonitoringService{
     }
 
     async updateDate(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
-        return this.exhibitorMonitoringRepository.update(
+        await this.exhibitorMonitoringRepository.update(
           {
               exhibitor: exhibitorMonitoringDto.exhibitor,
               festival: exhibitorMonitoringDto.festival
@@ -39,6 +39,7 @@ export class ExhibitorMonitoringService{
               dateContact2: exhibitorMonitoringDto.dateContact2,
               dateContact3: exhibitorMonitoringDto.dateContact3
           })
+        return this.updateStatus(exhibitorMonitoringDto)
     }
 
     async getByFestivalAndExhibitor(idFestival: number, idExhibitor: number) {
