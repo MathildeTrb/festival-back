@@ -30,14 +30,14 @@ export class FestivalController {
         return await this.festivalService.getCurrent();
     }
 
-    @Get(":id")
-    async getById(@Param('id', ParseIntPipe) id: number) {
-        return await this.festivalService.getById(id);
-    }
-
     @Get("current/games")
     async getCurrentWithGames() {
         return await this.festivalService.getCurrentWithGames();
+    }
+
+    @Get(":id")
+    async getById(@Param('id', ParseIntPipe) id: number) {
+        return await this.festivalService.getById(id);
     }
 
 

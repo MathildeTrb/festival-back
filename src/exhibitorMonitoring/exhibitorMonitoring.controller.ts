@@ -40,4 +40,12 @@ export class ExhibitorMonitoringController {
         return await this.exhibitorMonitoringService.getReservationsByIdFestival(id);
     }
 
+    @Get(":idExhibitor/dashboard/:idFestival")
+    async getDashboard(
+        @Param("idExhibitor", ParseIntPipe) idExhibitor: number,
+        @Param("idFestival", ParseIntPipe) idFestival: number
+    ) {
+        return await this.exhibitorMonitoringService.getDashboard(idExhibitor, idFestival);
+    }
+
 }

@@ -11,6 +11,8 @@ export class SpaceController {
         return await this.spaceService.getAll(id);
     }
 
+
+
     /*
     @Post()
     async create(@Body("space") space: SpaceDto){
