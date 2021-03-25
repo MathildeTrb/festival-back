@@ -39,6 +39,7 @@ export class ReservationService {
     async getAllByIdFestival(id: number): Promise<Reservation[]> {
         return (await this.reservationRepository.find({
             relations: [
+                "gameMonitorings",
                 "reservationDetails",
                 "reservationDetails.reservation",
                 "reservationDetails.space",
