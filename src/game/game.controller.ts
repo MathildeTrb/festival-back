@@ -10,6 +10,7 @@ import {
     Put
 } from "@nestjs/common";
 import {GameDto} from "./game.dto";
+import {Game} from "./game.entity";
 
 @Controller("games")
 export class GameController {
@@ -34,5 +35,10 @@ export class GameController {
     @Delete(":id")
     async delete(@Param("id", ParseIntPipe) id: number) {
         return await this.gameService.delete(id);
+    }
+
+    @Get("current")
+    async getGamesOfCurrentFestival() {
+        return await this.gameService.getGamesOfCurrentFestival();
     }
 }

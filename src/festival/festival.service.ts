@@ -8,6 +8,7 @@ import {Company} from "../company/company.entity";
 import {CompanyService} from "../company/company.service";
 import {ExhibitorMonitoringService} from "../exhibitorMonitoring/exhibitorMonitoring.service";
 import {AreaService} from "../area/area.service";
+import {Space} from "../space/space.entity";
 
 @Injectable()
 export class FestivalService {
@@ -26,6 +27,7 @@ export class FestivalService {
         const festival: Festival = new Festival();
         festival.name = newFestival.name;
         festival.isCurrent = newFestival.isCurrent;
+        festival.description = newFestival.description;
         if (festival.isCurrent) {
             await this.synchronizeFestival();
         }
@@ -54,7 +56,18 @@ export class FestivalService {
 
     async getAll() {
         return this.festivalRepository.find({
-            relations: ["spaces"]
+            relations: [
+                "spaces",
+                "areas",
+                "areas.gameMonitorings",
+                "areas.gameMonitorings.game",
+                "areas.gameMonitorings.reservation",
+                "areas.gameMonitorings.reservation.exhibitorMonitoring"/*,
+                "exhibitorMonitorings",
+                "exhibitorMonitorings.reservation",
+                "exhibitorMonitorings.reservation.gameMonitorings",
+                "exhibitorMonitorings.reservation.gameMonitorings.game"*/
+            ]
         });
     }
 
@@ -70,7 +83,7 @@ export class FestivalService {
     }
 
     async getCurrentWithGames() {
-        const currentFestival: Festival = await this.getCurrent();
+        const {spaces, ...currentFestival}: Festival = await this.getCurrent();
 
         return {
             ...currentFestival,

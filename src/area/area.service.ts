@@ -11,7 +11,7 @@ export class AreaService {
     private areaRepository: Repository<Area>
 
     async create(newArea: AreaDto){
-        const area : Area = Area.createFromDto(newArea);
+        const area: Area = Area.createFromDto(newArea);
         return this.areaRepository.save(area)
     }
 

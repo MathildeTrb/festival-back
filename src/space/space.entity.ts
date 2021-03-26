@@ -22,7 +22,7 @@ export class Space {
   tableTotal: number;
 
   @Column({ name: "table_remaining_number" })
-  tableRemaining: number;
+  tableRemaining: number;f
 
   @ManyToOne(() => Festival, festival => festival.spaces)
   @JoinColumn({ name: "id_festival" })

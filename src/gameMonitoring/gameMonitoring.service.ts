@@ -27,5 +27,9 @@ export class GameMonitoringService {
         return this.gameMonitoringRepository.getAllByFestival(id)
     }
 
+    async getGamesOfCurrentFestival() {
+        return this.gameMonitoringRepository.findGamesOfCurrentFestival();
+    }
+
 }
 

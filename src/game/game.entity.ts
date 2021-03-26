@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {GameType} from "../gameType/gameType.entity";
 import {Company} from "../company/company.entity";
 import {GameDto} from "./game.dto";
+import {GameMonitoring} from "../gameMonitoring/gameMonitoring.entity";
 
 @Entity("game")
 export class Game {
@@ -56,6 +57,9 @@ export class Game {
     @JoinColumn({name: "id_editor"})
     editor: Company | number
 
+    @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.game)
+    gameMonitorings: GameMonitoring[];
+
     static createFromDto(gameDto: GameDto): Game {
         const game: Game = new Game();
 
@@ -72,7 +76,6 @@ export class Game {
 
         return game;
     }
-
 
 
 }

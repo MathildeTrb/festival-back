@@ -10,6 +10,9 @@ export class ExhibitorMonitoringStatus {
     @Column({name: "label_exhibitor_monitoring_status"})
     label: string
 
+    @Column({name: "trigger_reservation_exhibitor"})
+    triggerReservation: boolean
+
     @OneToMany(() => ExhibitorMonitoring, exhibitorMonitoring => exhibitorMonitoring.status)
     exhibitorMonitorings: ExhibitorMonitoring[];
 }

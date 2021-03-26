@@ -17,6 +17,11 @@ export class GameMonitoringController {
         return await this.gameMonitoringService.update(gameM)
     }
 
+    @Get("current")
+    async getGamesOfCurrent() {
+        return await this.gameMonitoringService.getGamesOfCurrentFestival();
+    }
+
     @Get(":id")
     async getByFestival(@Param('id',ParseIntPipe) id: number){
         return await this.gameMonitoringService.getAllByFestival(id)

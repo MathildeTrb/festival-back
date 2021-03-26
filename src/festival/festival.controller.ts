@@ -3,6 +3,7 @@ import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {FestivalService} from "./festival.service";
 import {SpaceDto} from "../space/space.dto";
 import {FestivalDto} from "./festival.dto";
+import {Area} from "../area/area.entity";
 
 @Controller('festivals')
 export class FestivalController {

@@ -9,11 +9,11 @@ import {GameMonitoringDto} from "./gameMonitoring.dto";
 @Entity("game_monitoring")
 export class GameMonitoring {
 
-    @ManyToOne(() => Game, {primary: true})
+    @ManyToOne(() => Game, game => game.gameMonitorings, {primary: true})
     @JoinColumn({name: "id_game"})
     game: Game;
 
-    @ManyToOne(() => Reservation, {primary: true})
+    @ManyToOne(() => Reservation, reservation => reservation.gameMonitorings, {primary: true})
     @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 

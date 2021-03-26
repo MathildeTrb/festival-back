@@ -24,6 +24,7 @@ export class Area {
         const area: Area = new Area();
 
         area.label = areaDto.label;
+        area.festival = areaDto.festival;
 
         return area;
     }
