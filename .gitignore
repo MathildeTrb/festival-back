@@ -37,3 +37,4 @@ lerna-debug.log*
 /storage.json
 /.env
 /ormconfig.json
+/ormconfig.env
