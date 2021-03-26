@@ -8,4 +8,6 @@ async function bootstrap() {
   app.setGlobalPrefix("/api")
   await app.listen(port);
 }
-bootstrap().then(() => console.log(`API running on http://localhost:${port}/api`));
+bootstrap().then(() => {
+  console.log(`API running on http://localhost:${port}/api`)
+});

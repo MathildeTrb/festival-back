@@ -1,11 +1,16 @@
 import {Injectable} from "@nestjs/common";
-import {gcs} from "../utils/gcs";
-import {Bucket, File} from "@google-cloud/storage";
+import { Bucket, File, Storage } from "@google-cloud/storage";
 
 @Injectable()
 export class PhotoService {
 
     async uploadFile(file: any): Promise<string> {
+
+        const gcs: Storage = new Storage({
+            //keyFilename: path.join(__dirname, "../../storage.json"),
+            projectId: "festival-jeu",
+            credentials: JSON.parse(process.env.GCS_KEYFILE)
+        })
 
         const bucket: Bucket = gcs.bucket("photo_element_festival");
 

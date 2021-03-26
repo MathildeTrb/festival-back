@@ -36,7 +36,10 @@ import {PhotoModule} from "./photo/photo.module";
         SpaceModule,
         UserModule,
         PhotoModule,
-        ConfigModule.forRoot()
+        ConfigModule.forRoot({
+            envFilePath:".env",
+            isGlobal:true
+        })
     ]
 })
 export class AppModule {}
