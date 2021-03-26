@@ -1,14 +1,12 @@
-import {Inject, Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import {Festival} from "./festival.entity";
 import {FestivalDto} from "./festival.dto";
 import {SpaceDto} from "../space/space.dto";
 import {SpaceService} from "../space/space.service";
-import {FestivalRepository} from "./festival.repository";
 import {Company} from "../company/company.entity";
 import {CompanyService} from "../company/company.service";
 import {ExhibitorMonitoringService} from "../exhibitorMonitoring/exhibitorMonitoring.service";
 import {AreaService} from "../area/area.service";
-import {Space} from "../space/space.entity";
 import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 

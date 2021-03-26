@@ -1,6 +1,4 @@
 import { Module } from "@nestjs/common";
-import { DatabaseModule } from "../database/database.module";
-import {gameTypeProviders} from "./gameType.providers";
 import {GameTypeService} from "./gameType.service";
 import {GameTypeController} from "./gameType.controller";
 import {TypeOrmModule} from "@nestjs/typeorm";

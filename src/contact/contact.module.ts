@@ -1,6 +1,4 @@
 import {Module} from '@nestjs/common';
-import {DatabaseModule} from "../database/database.module";
-import {contactProviders} from "./contact.providers";
 import {ContactService} from "./contact.service";
 import {ContactController} from "./contact.controller";
 import {TypeOrmModule} from "@nestjs/typeorm";
