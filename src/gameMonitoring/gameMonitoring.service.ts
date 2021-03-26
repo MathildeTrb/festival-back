@@ -2,12 +2,16 @@ import {Inject, Injectable} from "@nestjs/common";
 import {GameMonitoring} from "./gameMonitoring.entity";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 import {GameMonitoringRepository} from "./gameMonitoring.repository"
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class GameMonitoringService {
 
-    @Inject("GAME_MONITORING_REPOSITORY")
-    private readonly gameMonitoringRepository: GameMonitoringRepository
+    constructor(
+        @InjectRepository(GameMonitoringRepository)
+        private readonly gameMonitoringRepository: GameMonitoringRepository
+    ) {
+    }
 
     async create(gameMDto : GameMonitoringDto){
         const gameMonitoring: GameMonitoring = new GameMonitoring();

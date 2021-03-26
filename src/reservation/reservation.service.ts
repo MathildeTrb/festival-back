@@ -3,12 +3,13 @@ import {Repository} from "typeorm";
 import {Reservation} from "./reservation.entity";
 import {ReservationDto} from "./reservation.dto";
 import {ReservationDetailsService} from "../reservationDetails/reservationDetails.service";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class ReservationService {
     constructor(
         private readonly reservationDetailsService: ReservationDetailsService,
-        @Inject("RESERVATION_REPOSITORY")
+        @InjectRepository(Reservation)
         private reservationRepository: Repository<Reservation>
     ) {
     }

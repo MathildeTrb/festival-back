@@ -2,12 +2,15 @@ import {Inject, Injectable} from "@nestjs/common";
 import {Company} from "./company.entity";
 import {CompanyRepository} from "./company.repository";
 import {CompanyDto} from "./company.dto";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class CompanyService {
 
-    @Inject("COMPANY_REPOSITORY")
-    private readonly companyRepository: CompanyRepository;
+    constructor(
+        @InjectRepository(CompanyRepository)
+        private readonly companyRepository: CompanyRepository
+    ) {}
 
     async getAllAvailable(): Promise<Company[]> {
         const companies = await this.companyRepository.findAvailable();

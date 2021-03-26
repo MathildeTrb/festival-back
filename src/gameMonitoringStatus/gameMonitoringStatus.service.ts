@@ -1,12 +1,14 @@
 import {Inject, Injectable} from "@nestjs/common";
 import {Repository} from "typeorm";
 import {GameMonitoringStatus} from "./gameMonitoringStatus.entity";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class GameMonitoringStatusService {
 
-    @Inject("GAME_MONITORING_STATUS_REPOSITORY")
-    private readonly gameMonitoringStatusRepository: Repository<GameMonitoringStatus>
+    constructor(@InjectRepository(GameMonitoringStatus)
+                private readonly gameMonitoringStatusRepository: Repository<GameMonitoringStatus>) {
+    }
 
     async getAll(): Promise<GameMonitoringStatus[]> {
         return this.gameMonitoringStatusRepository.find({

@@ -3,11 +3,12 @@ import { DatabaseModule } from "../database/database.module";
 import {gameTypeProviders} from "./gameType.providers";
 import {GameTypeService} from "./gameType.service";
 import {GameTypeController} from "./gameType.controller";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {GameType} from "./gameType.entity";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [TypeOrmModule.forFeature([GameType])],
     providers: [
-        ...gameTypeProviders,
         GameTypeService
     ],
     controllers: [GameTypeController]

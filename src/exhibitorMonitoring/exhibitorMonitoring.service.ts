@@ -1,16 +1,20 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {ExhibitorMonitoringRepository} from "./exhibitorMonitoring.repository";
 import {ExhibitorMonitoringDto} from "./exhibitorMonitoring.dto";
 import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
 import {Festival} from "../festival/festival.entity";
 import {Company} from "../company/company.entity";
+import {Repository} from "typeorm";
+import {InjectRepository} from "@nestjs/typeorm";
 
 
 @Injectable()
 export class ExhibitorMonitoringService {
 
-    @Inject("EXHIBITOR_MONITORING_REPOSITORY")
-    private readonly exhibitorMonitoringRepository: ExhibitorMonitoringRepository
+    constructor(
+        @InjectRepository(ExhibitorMonitoring)
+        private readonly exhibitorMonitoringRepository: Repository<ExhibitorMonitoring>
+    ) {
+    }
 
     async create(festival: Festival, exhibitor: Company) {
         const exhibitorMonitoring: ExhibitorMonitoring = new ExhibitorMonitoring();
@@ -22,11 +26,28 @@ export class ExhibitorMonitoringService {
     }
 
     async getAll(): Promise<ExhibitorMonitoring[]> {
-        return this.exhibitorMonitoringRepository.findAll();
+        return this.exhibitorMonitoringRepository.find({
+            order: {
+                exhibitor: "ASC"
+            }
+        });
     }
 
     async getByFestival(id: number): Promise<ExhibitorMonitoring[]> {
-        return this.exhibitorMonitoringRepository.getByFestival(id);
+        return this.exhibitorMonitoringRepository.find({
+            where: {
+                festival: id
+            },
+            relations: [
+                "festival",
+                "status",
+                "exhibitor",
+                "reservation",
+                "reservation.reservationDetails",
+                "reservation.reservationDetails.space",
+                "reservation.gameMonitorings"
+            ]
+        });
     }
 
     async updateDate(exhibitorMonitoringDto: ExhibitorMonitoringDto) {
@@ -65,9 +86,7 @@ export class ExhibitorMonitoringService {
             where: {
                 festival: id
             },
-            relations: [
-
-            ]
+            relations: []
         })
     }
 

@@ -3,11 +3,12 @@ import { DatabaseModule } from "../database/database.module";
 import { SpaceController } from "./space.controller";
 import { SpaceService } from "./space.service";
 import { spaceProviders } from "./space.providers";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Space} from "./space.entity";
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [TypeOrmModule.forFeature([Space])],
   providers: [
-    ...spaceProviders,
     SpaceService
   ],
   controllers: [SpaceController],

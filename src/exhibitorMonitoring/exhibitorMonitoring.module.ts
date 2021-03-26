@@ -3,11 +3,12 @@ import {DatabaseModule} from "../database/database.module";
 import {ExhibitorMonitoringService} from "./exhibitorMonitoring.service";
 import {exhibitorMonitoringProviders} from "./exhibitorMonitoring.providers";
 import {ExhibitorMonitoringController} from "./exhibitorMonitoring.controller";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [TypeOrmModule.forFeature([ExhibitorMonitoring])],
     providers: [
-        ...exhibitorMonitoringProviders,
         ExhibitorMonitoringService,
     ],
     exports: [ExhibitorMonitoringService],

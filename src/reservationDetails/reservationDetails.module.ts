@@ -3,11 +3,12 @@ import { DatabaseModule } from "../database/database.module";
 import { reservationDetailsProviders } from "./reservationDetails.providers";
 import { ReservationDetailsService } from "./reservationDetails.service";
 import { ReservationDetailsController } from "./reservationDetails.controller";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {ReservationDetails} from "./reservationDetails.entity";
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [TypeOrmModule.forFeature([ReservationDetails])],
   providers: [
-    ...reservationDetailsProviders,
     ReservationDetailsService
   ],
   controllers: [ReservationDetailsController],

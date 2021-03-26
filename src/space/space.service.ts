@@ -3,11 +3,12 @@ import {Repository} from "typeorm";
 import {Space} from "./space.entity";
 import {Festival} from "../festival/festival.entity";
 import {SpaceDto} from "./space.dto";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class SpaceService {
     constructor(
-        @Inject("SPACE_REPOSITORY")
+        @InjectRepository(Space)
         private spaceRepository: Repository<Space>
     ) {
     }

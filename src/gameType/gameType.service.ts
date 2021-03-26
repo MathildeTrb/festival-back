@@ -1,13 +1,17 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {GameTypeRepository} from "./gameType.repository";
 import {GameTypeDto} from "./gameType.dto";
 import {GameType} from "./gameType.entity";
+import {Repository} from "typeorm";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class GameTypeService {
 
-    @Inject("GAME_TYPE_REPOSITORY")
-    private readonly gameTypeRepository: GameTypeRepository;
+    constructor(
+        @InjectRepository(GameType)
+        private readonly gameTypeRepository: Repository<GameType>
+    ) {
+    }
 
     async create(gameTypeDto: GameTypeDto) {
 

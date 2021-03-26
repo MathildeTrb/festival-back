@@ -7,11 +7,12 @@ import { SpaceModule } from "../space/space.module";
 import { CompanyModule } from "../company/company.module";
 import { ExhibitorMonitoringModule } from "../exhibitorMonitoring/exhibitorMonitoring.module";
 import {AreaModule} from "../area/area.module";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Festival} from "./festival.entity";
 
 @Module({
-  imports: [DatabaseModule, SpaceModule, CompanyModule, ExhibitorMonitoringModule, AreaModule],
+  imports: [TypeOrmModule.forFeature([Festival]), SpaceModule, CompanyModule, ExhibitorMonitoringModule, AreaModule],
   providers: [
-    ...festivalProviders,
     FestivalService
   ],
   exports: [FestivalService],

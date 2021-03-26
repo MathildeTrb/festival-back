@@ -3,12 +3,16 @@ import {Game} from "./game.entity";
 import {GameRepository} from "./game.repository";
 import {GameDto} from "./game.dto";
 import {Area} from "../area/area.entity";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class GameService {
 
-    @Inject("GAME_REPOSITORY")
-    private readonly gameRepository: GameRepository
+    constructor(
+        @InjectRepository(GameRepository)
+        private readonly gameRepository: GameRepository
+    ) {
+    }
 
     async getAll(): Promise<Game[]> {
         return this.gameRepository.findAvailable();

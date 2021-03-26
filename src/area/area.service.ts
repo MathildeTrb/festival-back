@@ -3,14 +3,17 @@ import {Repository} from "typeorm";
 import {Area} from "./area.entity";
 import {AreaDto} from "./area.dto";
 import {Game} from "../game/game.entity";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class AreaService {
 
-    @Inject("AREA_REPOSITORY")
-    private areaRepository: Repository<Area>
+    constructor(
+        @InjectRepository(Area)
+        private areaRepository: Repository<Area>
+    ) {}
 
-    async create(newArea: AreaDto){
+    async create(newArea: AreaDto) {
         const area: Area = Area.createFromDto(newArea);
         return this.areaRepository.save(area)
     }

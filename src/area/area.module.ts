@@ -3,11 +3,12 @@ import {DatabaseModule} from "../database/database.module";
 import {areaProviders} from "./area.providers";
 import {AreaService} from "./area.service";
 import {AreaController} from "./area.controller";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Area} from "./area.entity";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [TypeOrmModule.forFeature([Area])],
     providers: [
-        ...areaProviders,
         AreaService,
     ],
     controllers:[AreaController],

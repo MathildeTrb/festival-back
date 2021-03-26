@@ -3,11 +3,12 @@ import { Repository } from "typeorm";
 import { User } from "./user.entity";
 import { UserDto } from "./user.dto";
 import * as bcrypt from "bcrypt";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class UserService {
   constructor(
-    @Inject("USER_REPOSITORY")
+    @InjectRepository(User)
     private userRepository: Repository<User>
   ) {
   }

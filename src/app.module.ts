@@ -14,12 +14,31 @@ import {ReservationModule} from "./reservation/reservation.module";
 import {ReservationDetailsModule} from "./reservationDetails/reservationDetails.module";
 import {SpaceModule} from "./space/space.module";
 import {UserModule} from "./user/user.module";
-import {ConfigModule} from "@nestjs/config";
+import {ConfigModule, ConfigService} from "@nestjs/config";
 import {PhotoModule} from "./photo/photo.module";
+import {TypeOrmModule} from "@nestjs/typeorm";
 
 
 @Module({
     imports: [
+        ConfigModule.forRoot({
+            envFilePath:".env",
+            isGlobal:true
+        }),
+        TypeOrmModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => ({
+                type: "mysql",
+                host: configService.get<string>("TYPEORM_HOST"),
+                username: configService.get<string>("TYPEORM_USERNAME"),
+                password: configService.get<string>("TYPEORM_PASSWORD"),
+                database: configService.get<string>("TYPEORM_DATABASE"),
+                synchronize: true,
+                logging: false,
+                autoLoadEntities: true
+            })
+        }),
         AuthModule,
         AreaModule,
         CompanyModule,
@@ -35,11 +54,7 @@ import {PhotoModule} from "./photo/photo.module";
         ReservationDetailsModule,
         SpaceModule,
         UserModule,
-        PhotoModule,
-        ConfigModule.forRoot({
-            envFilePath:".env",
-            isGlobal:true
-        })
+        PhotoModule
     ]
 })
 export class AppModule {}

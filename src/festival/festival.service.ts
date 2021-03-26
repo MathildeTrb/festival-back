@@ -9,6 +9,8 @@ import {CompanyService} from "../company/company.service";
 import {ExhibitorMonitoringService} from "../exhibitorMonitoring/exhibitorMonitoring.service";
 import {AreaService} from "../area/area.service";
 import {Space} from "../space/space.entity";
+import {Repository} from "typeorm";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class FestivalService {
@@ -17,8 +19,8 @@ export class FestivalService {
         private readonly companyService: CompanyService,
         private readonly exhibitorMonitoringService: ExhibitorMonitoringService,
         private readonly areaService: AreaService,
-        @Inject("FESTIVAL_REPOSITORY")
-        private festivalRepository: FestivalRepository,
+        @InjectRepository(Festival)
+        private festivalRepository: Repository<Festival>,
     ) {
     }
 
