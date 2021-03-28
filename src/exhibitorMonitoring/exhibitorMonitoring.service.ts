@@ -3,7 +3,7 @@ import {ExhibitorMonitoringDto} from "./exhibitorMonitoring.dto";
 import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
 import {Festival} from "../festival/festival.entity";
 import {Company} from "../company/company.entity";
-import {Repository} from "typeorm";
+import {IsNull, Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 
 
@@ -81,15 +81,6 @@ export class ExhibitorMonitoringService {
         })
     }
 
-    async getReservationsByIdFestival(id: number) {
-        return this.exhibitorMonitoringRepository.find({
-            where: {
-                festival: id
-            },
-            relations: []
-        })
-    }
-
     async getDashboard(idExhibitor: number, idFestival: number): Promise<ExhibitorMonitoring> {
         return this.exhibitorMonitoringRepository.findOne({
             where: {
@@ -111,4 +102,48 @@ export class ExhibitorMonitoringService {
             ]
         });
     }
+
+    async getReservationsConfirmed(idFestival: number) : Promise<ExhibitorMonitoring[]> {
+        return this.exhibitorMonitoringRepository.find({
+            where: {
+                festival: idFestival,
+                status: 6
+
+            },
+                relations:[]
+        })
+    }
+
+    async getReservationsByIdFestival(id: number) {
+        return this.exhibitorMonitoringRepository.find({
+            where: {
+                festival: id
+            },
+            relations: []
+        })
+    }
+
+
+    async getPeopleNotContactedByFestival(id: number) : Promise<ExhibitorMonitoring[]>{
+        return this.exhibitorMonitoringRepository.find(
+            {
+                where: {
+                    festival: id,
+                    status: 1
+                },
+                relations:[]
+            }
+        )
+    }
+
+    async getPeopleContactedNoAnswer(id:number){
+        return this.exhibitorMonitoringRepository.find({
+            where:{
+                festival: id,
+                status:2
+            },
+            relations:["exhibitor"]
+        })
+    }
+
 }

@@ -41,4 +41,9 @@ export class GameController {
     async getGamesOfCurrentFestival() {
         return await this.gameService.getGamesOfCurrentFestival();
     }
+
+    @Get(":idFestival/gamesNotReceived")
+    async getGamesNotReceivedByFestival(@Param("idFestival", ParseIntPipe) id:number){
+        return await this.gameService.getGamesNotReceivedByFestival(id)
+    }
 }

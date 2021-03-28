@@ -41,4 +41,15 @@ export class GameRepository extends Repository<Game> {
             .where("festival.isCurrent = :value", {value: true})
             .getMany();
     }
+
+    async getGamesNotReceivedByfestival(id: number) {
+        return this.find(
+            {
+                where: {
+
+                }
+            }
+
+        )
+    }
 }

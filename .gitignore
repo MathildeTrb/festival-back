@@ -34,7 +34,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 /bdd.puml
 /src/auth/constants.ts
-/storage.json
 /.env
-/ormconfig.json
+
 /ormconfig.env

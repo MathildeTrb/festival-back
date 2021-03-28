@@ -49,4 +49,8 @@ export class GameService {
 
         return res;
     }
+
+    async getGamesNotReceivedByFestival(id: number){
+
+    }
 }
