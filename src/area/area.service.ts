@@ -48,7 +48,7 @@ export class AreaService {
             res.push({
                 id: area.id,
                 label: area.label,
-                games
+                games: games[0] ? games : []
             })
         })
 
