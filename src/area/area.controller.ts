@@ -23,7 +23,12 @@ export class AreaController {
 
     @Get("current/:idGame")
     async getAreasByGame(@Param("idGame", ParseIntPipe) idGame: number) {
-        return await this.areaService.getAreasByGame(idGame);
+        return (await this.areaService.getAreasByGame(idGame)).map(({festival, ...area}) => {
+            return {
+                ...area,
+                games: []
+            }
+        });
     }
 }
 
