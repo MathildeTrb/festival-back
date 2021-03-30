@@ -32,6 +32,8 @@ export class GameMonitoringRepository extends Repository<GameMonitoring> {
             .getMany();
     }
 
+
+
     async findGamesOfCurrentFestival() {
         return this.find({
             where: {

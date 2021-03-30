@@ -48,10 +48,19 @@ export class AreaService {
             res.push({
                 id: area.id,
                 label: area.label,
-                games
+                games: games[0] ? games : []
             })
         })
 
         return res;
+    }
+
+    async getAreasByGame(idGame: number): Promise<Area[]> {
+        return (await this.areaRepository.createQueryBuilder("area")
+            .innerJoinAndSelect("area.festival", "festival")
+            .innerJoin("area.gameMonitorings", "gameMonitoring")
+            .where("gameMonitoring.game = :game", {game: idGame})
+            .getMany())
+            .filter(area => area.festival.isCurrent);
     }
 }

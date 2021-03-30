@@ -74,7 +74,7 @@ export class FestivalService {
     async getCurrent() {
         return this.festivalRepository.findOne({
             where: {isCurrent: true},
-            relations: ["spaces"]
+            relations: ["spaces", "areas"]
         });
     }
 
