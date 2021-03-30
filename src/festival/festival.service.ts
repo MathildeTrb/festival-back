@@ -23,7 +23,6 @@ export class FestivalService {
     }
 
     async create(newFestival: FestivalDto, newSpaces: SpaceDto[]) {
-
         const festival: Festival = new Festival();
         festival.name = newFestival.name;
         festival.isCurrent = newFestival.isCurrent;
@@ -89,6 +88,28 @@ export class FestivalService {
             ...currentFestival,
             areas: await this.areaService.getAllWithGamesByIdFestival(currentFestival.id)
         }
+    }
+
+    async getGamesNotPlaced(id){
+        console.log(id)
+        return await this.festivalRepository.createQueryBuilder("festival")
+            .innerJoinAndSelect("festival.areas", "area")
+            .innerJoinAndSelect("area.gameMonitorings", "gameMonitoring")
+            .innerJoinAndSelect("gameMonitoring.game", "game")
+            .where("festival.id = :id", {id: id})
+            .andWhere("gameMonitoring.isPlaced = :isPlaced", {isPlaced: false})
+            .getMany();
+    }
+
+    async getGamesNotReceived(id){
+        return await this.festivalRepository.createQueryBuilder("festival")
+            .innerJoinAndSelect("festival.areas", "area")
+            .innerJoinAndSelect("area.gameMonitorings", "gameMonitoring")
+            .innerJoinAndSelect("gameMonitoring.status", "status")
+            .innerJoinAndSelect("gameMonitoring.game", "game")
+            .where("festival.id = :id", {id: id})
+            .andWhere("gameMonitoring.status  != :valeur", {valeur: 3})
+            .getMany();
     }
 
     /* async getWithGameMonitoringsById(id: number): Promise<GameMonitoring[]> {

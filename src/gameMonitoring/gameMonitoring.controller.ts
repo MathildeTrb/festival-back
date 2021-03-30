@@ -7,6 +7,25 @@ export class GameMonitoringController {
 
     constructor(private readonly gameMonitoringService: GameMonitoringService) {}
 
+    @Get(":idFestival/gamesNotPlaced")
+    async getGamesNotPlacedByFestival(@Param("idFestival", ParseIntPipe) id:number){
+        console.log("GAMES NOT PLACED")
+        return await this.gameMonitoringService.getGamesNotPlacedByFestival(id)
+    }
+
+    @Get(":idFestival/gamesNotReceived")
+    async getGamesNotReceivedByFestival(@Param("idFestival", ParseIntPipe) id:number){
+        console.log("GAMES NOT RECEIVED")
+        return await this.gameMonitoringService.getGamesNotReceivedByFestival(id)
+    }
+
+    @Get(":idFestival")
+    async getAllGamesByFestival(@Param("idFestival", ParseIntPipe) id: number){
+
+        console.log("ALL GAMES BY FESTIVAL")
+        return await this.gameMonitoringService.getAllByFestival(id)
+    }
+
     @Post()
     async create(@Body("gameMonitoring") gameM : GameMonitoringDto){
         return await this.gameMonitoringService.create(gameM)
@@ -26,5 +45,8 @@ export class GameMonitoringController {
     async getByFestival(@Param('id',ParseIntPipe) id: number){
         return await this.gameMonitoringService.getAllByFestival(id)
     }
+
+
+
 }
 

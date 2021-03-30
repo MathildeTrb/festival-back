@@ -50,7 +50,12 @@ export class GameService {
         return res;
     }
 
-    async getGamesNotReceivedByFestival(id: number){
 
+    async getAllGamesByFestival(id: number): Promise<Game[]>{
+        return this.gameRepository.getAllGamesByFestival(id)
+    }
+
+    async getGamesNotPlacedByFestival(id: number) : Promise<Game[]>{
+        return this.gameRepository.getGamesNotPlacedByFestival(id)
     }
 }

@@ -17,6 +17,18 @@ export class GameController {
 
     constructor(private readonly gameService: GameService) {}
 
+    @Get(":idFestival/allGames")
+    async getAllGamesByFestival(@Param("idFestival", ParseIntPipe) id: number){
+        console.log("GET ALL GAMES FESTIVAL")
+        return await this.gameService.getAllGamesByFestival(id)
+    }
+
+    @Get(":idFestival/gamesNotPlaced")
+    async getGamesNotPlacedByFestival(@Param("idFestival", ParseIntPipe) id: number){
+        console.log("GET NOT PLACED GAMES FESTIVAL")
+        return await this.gameService.getGamesNotPlacedByFestival(id)
+    }
+
     @Get()
     async getAll() {
         return await this.gameService.getAll();
@@ -42,8 +54,10 @@ export class GameController {
         return await this.gameService.getGamesOfCurrentFestival();
     }
 
-    @Get(":idFestival/gamesNotReceived")
-    async getGamesNotReceivedByFestival(@Param("idFestival", ParseIntPipe) id:number){
-        return await this.gameService.getGamesNotReceivedByFestival(id)
-    }
+
+
+
+
+
 }
+

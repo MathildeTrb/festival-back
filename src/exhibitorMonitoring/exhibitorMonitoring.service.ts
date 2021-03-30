@@ -3,7 +3,7 @@ import {ExhibitorMonitoringDto} from "./exhibitorMonitoring.dto";
 import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
 import {Festival} from "../festival/festival.entity";
 import {Company} from "../company/company.entity";
-import {IsNull, Repository} from "typeorm";
+import {Equal, IsNull, MoreThan, Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 
 
@@ -137,7 +137,7 @@ export class ExhibitorMonitoringService {
     }
 
     async getPeopleContactedNoAnswer(id:number){
-        return this.exhibitorMonitoringRepository.find({
+        return await this.exhibitorMonitoringRepository.find({
             where:{
                 festival: id,
                 status:2
@@ -146,4 +146,13 @@ export class ExhibitorMonitoringService {
         })
     }
 
+    async getPeopleContacted(id:number){
+        return await this.exhibitorMonitoringRepository.find({
+            where:{
+                festival: id,
+                status: MoreThan(1)
+            },
+            relations:["exhibitor"]
+        })
+    }
 }

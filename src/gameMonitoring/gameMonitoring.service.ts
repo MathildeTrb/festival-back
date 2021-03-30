@@ -35,5 +35,15 @@ export class GameMonitoringService {
         return this.gameMonitoringRepository.findGamesOfCurrentFestival();
     }
 
+    async getGamesNotReceivedByFestival(id: number){
+        return await this.gameMonitoringRepository.getGamesNotReceivedByFestival(id)
+    }
+
+    async getGamesNotPlacedByFestival(id: number) : Promise<GameMonitoring[]> {
+        const test = await this.gameMonitoringRepository.getGamesNotPlacedByFestival(id)
+        console.log(test)
+        return test
+    }
+
 }
 

@@ -13,6 +13,16 @@ export class FestivalController {
     ) {
     }
 
+    @Get(":idFestival/GamesNotPlaced")
+    async  getGamesNotPlaced(@Param("idFestival", ParseIntPipe) id:number){
+        return await this.festivalService.getGamesNotPlaced(id)
+    }
+
+    @Get(":idFestival/GamesNotReceived")
+    async getGamesNotReceived(@Param("idFestival", ParseIntPipe) id: number){
+        return await this.festivalService.getGamesNotReceived(id)
+    }
+
     /*@UseGuards(JwtAuthGuard)*/
     @Post()
     async create(

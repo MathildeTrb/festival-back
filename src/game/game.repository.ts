@@ -42,14 +42,23 @@ export class GameRepository extends Repository<Game> {
             .getMany();
     }
 
-    async getGamesNotReceivedByfestival(id: number) {
-        return this.find(
-            {
-                where: {
-
-                }
-            }
-
-        )
+    async getAllGamesByFestival(id:number): Promise<Game[]> {
+        return this.createQueryBuilder("game")
+            .innerJoinAndSelect("game.gameMonitorings", "gameMonitoring")
+            .innerJoinAndSelect("gameMonitoring.area", "area")
+            .innerJoinAndSelect("area.festival", "festival")
+            .where("festival.id = :id", {id:id} )
+            .getMany()
     }
+
+    async getGamesNotPlacedByFestival(id:number): Promise<Game[]> {
+        return this.createQueryBuilder("game")
+            .innerJoinAndSelect("game.gameMonitorings", "gameMonitoring")
+            .innerJoinAndSelect("gameMonitoring.area", "area")
+            .innerJoinAndSelect("area.festival", "festival")
+            .where("gameMonitoring.isPlaced = :value ", {value: false})
+            .andWhere("festival.id = :id", {id:id} )
+            .getMany()
+    }
+
 }
