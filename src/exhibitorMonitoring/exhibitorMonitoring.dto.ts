@@ -7,6 +7,7 @@ export class ExhibitorMonitoringDto{
     exhibitor : Company;
     festival : Festival;
     status : ExhibitorMonitoringStatus;
+    comment: string;
     reservation: Reservation;
     dateContact1 : Date;
     dateContact2 : Date;

@@ -22,7 +22,6 @@ export class ReservationService {
         const reservation: Reservation = new Reservation();
         reservation.needVolunteer = newReservation.needVolunteer;
         reservation.willCome = newReservation.willCome;
-        reservation.comment = newReservation.comment;
         reservation.discount = newReservation.discount;
         reservation.exhibitorMonitoring = newReservation.exhibitorMonitoring;
         const savedReservation = await this.reservationRepository.save(reservation);
