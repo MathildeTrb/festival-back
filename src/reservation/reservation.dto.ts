@@ -6,7 +6,6 @@ export class ReservationDto{
     id?:number;
     needVolunteer: boolean;
     willCome: boolean;
-    comment: string;
     discount: number;
     mailingDate: Date;
     paymentDate: Date;

@@ -10,13 +10,11 @@ export class ExhibitorMonitoringController {
 
     @Get("festival/:idFestival")
     async getReservationsConfirmed(@Param("idFestival", ParseIntPipe) idFestival: number){
-        console.log(idFestival)
         return await this.exhibitorMonitoringService.getReservationsConfirmed(idFestival)
     }
 
     @Get("festival/:idFestival/peopleContacted")
     async getPeopleContactedByFestival(@Param("idFestival", ParseIntPipe) idFestival: number){
-        console.log("PEOPLE CONTACTED")
         return await this.exhibitorMonitoringService.getPeopleContacted(idFestival)
     }
 
@@ -26,12 +24,6 @@ export class ExhibitorMonitoringController {
     async getAll(){
         return await this.exhibitorMonitoringService.getAll();
     }
-
-    /*@Get(":id")
-    async getByFestival(@Param("id", ParseIntPipe) id: number){
-        console.log("test")
-        return await this.exhibitorMonitoringService.getByFestival(id);
-    }*/
 
     @Get(":idFestival/:idExhibitor")
     async getByFestivalAndExhibitor(
@@ -73,6 +65,11 @@ export class ExhibitorMonitoringController {
     @Get("festival/:idFestival/peopleContactedNoAnswer")
     async getPeopleContactedNoAnswer(@Param("idFestival", ParseIntPipe) idFestival: number){
         return await this.exhibitorMonitoringService.getPeopleContactedNoAnswer(idFestival)
+    }
+
+    @Get(":id")
+    async getByFestival(@Param("id", ParseIntPipe) id: number){
+        return await this.exhibitorMonitoringService.getByFestival(id);
     }
 
 

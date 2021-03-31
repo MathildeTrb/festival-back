@@ -15,12 +15,6 @@ export class Reservation {
     @Column({name: "will_come"})
     willCome: boolean;
 
-    @Column("text", {
-        name: "comment_reservation",
-        nullable: true
-    })
-    comment: string;
-
     @Column("double", {
         name: "discount_reservation",
         default: 0

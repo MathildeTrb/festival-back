@@ -27,6 +27,12 @@ export class ExhibitorMonitoring {
     @JoinColumn({name: "id_reservation"})
     reservation: Reservation;
 
+    @Column("text", {
+        name: "comment_exhibitor_monitoring",
+        nullable: true
+    })
+    comment: string;
+
     @Column("date", {
         name: "date_contact_1",
         nullable: true
