@@ -20,5 +20,15 @@ export class AreaController {
     async getAllWithGamesByIdFestival(@Param("id", ParseIntPipe) id: number) {
         return await this.areaService.getAllWithGamesByIdFestival(id);
     }
+
+    @Get("current/:idGame")
+    async getAreasByGame(@Param("idGame", ParseIntPipe) idGame: number) {
+        return (await this.areaService.getAreasByGame(idGame)).map(({festival, ...area}) => {
+            return {
+                ...area,
+                games: []
+            }
+        });
+    }
 }
 
