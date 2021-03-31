@@ -46,7 +46,5 @@ export class GameMonitoringController {
         return await this.gameMonitoringService.getAllByFestival(id)
     }
 
-
-
 }
 

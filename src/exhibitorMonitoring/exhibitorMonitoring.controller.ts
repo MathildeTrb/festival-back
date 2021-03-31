@@ -42,6 +42,11 @@ export class ExhibitorMonitoringController {
         return await this.exhibitorMonitoringService.updateStatus(exhibitorMonitoringDto);
     }
 
+    @Put("comment")
+    async updateComment(@Body("exhibitorMonitoring") exhibitorMonitoring: ExhibitorMonitoringDto) {
+        return await this.exhibitorMonitoringService.updateComment(exhibitorMonitoring);
+    }
+
     @Get("reservations/festival/:id")
     async getReservationsByIdFestival(@Param("id", ParseIntPipe) id: number) {
         return await this.exhibitorMonitoringService.getReservationsByIdFestival(id);

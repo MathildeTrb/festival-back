@@ -63,6 +63,15 @@ export class ExhibitorMonitoringService {
         return this.updateStatus(exhibitorMonitoringDto)
     }
 
+    async updateComment(exhibitorMonitoring: ExhibitorMonitoringDto) {
+        return this.exhibitorMonitoringRepository.update({
+            exhibitor: exhibitorMonitoring.exhibitor,
+            festival: exhibitorMonitoring.festival
+        }, {
+            comment: exhibitorMonitoring.comment
+        })
+    }
+
     async getByFestivalAndExhibitor(idFestival: number, idExhibitor: number) {
         return this.exhibitorMonitoringRepository.find(
             {
@@ -114,6 +123,7 @@ export class ExhibitorMonitoringService {
         })
     }
 
+
     async getReservationsByIdFestival(id: number) {
         return this.exhibitorMonitoringRepository.find({
             where: {
@@ -122,7 +132,6 @@ export class ExhibitorMonitoringService {
             relations: []
         })
     }
-
 
     async getPeopleNotContactedByFestival(id: number) : Promise<ExhibitorMonitoring[]>{
         return this.exhibitorMonitoringRepository.find(
