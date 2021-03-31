@@ -4,6 +4,8 @@ import {GameRepository} from "./game.repository";
 import {GameDto} from "./game.dto";
 import {Area} from "../area/area.entity";
 import {InjectRepository} from "@nestjs/typeorm";
+import { contains } from "class-validator";
+import { Company } from "../company/company.entity";
 
 @Injectable()
 export class GameService {
@@ -48,6 +50,14 @@ export class GameService {
         })
 
         return res;
+    }
+
+    async getEditorsOfCurrentFestival(){
+        const games : Game[] =  await this.gameRepository.findGamesOfCurrentFestival()
+
+        const duplicateEditors: Company[] = games.map(game => game.editor);
+
+        return Array.from(new Set(duplicateEditors.map(editor => editor.id))).map(id => duplicateEditors.find(e => e.id === id))
     }
 
 

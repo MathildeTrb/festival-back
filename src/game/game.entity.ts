@@ -55,7 +55,7 @@ export class Game {
 
     @ManyToOne(() => Company)
     @JoinColumn({name: "id_editor"})
-    editor: Company | number
+    editor: Company
 
     @OneToMany(() => GameMonitoring, gameMonitoring => gameMonitoring.game)
     gameMonitorings: GameMonitoring[];

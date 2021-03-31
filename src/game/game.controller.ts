@@ -17,6 +17,13 @@ export class GameController {
 
     constructor(private readonly gameService: GameService) {}
 
+    @Get("currentEditors")
+    async getEditorsOfCurrentFestival(){
+        console.log("COUCOU JE SUIS LA")
+        return await this.gameService.getEditorsOfCurrentFestival();
+    }
+
+
     @Get(":idFestival/allGames")
     async getAllGamesByFestival(@Param("idFestival", ParseIntPipe) id: number){
         console.log("GET ALL GAMES FESTIVAL")
@@ -53,6 +60,8 @@ export class GameController {
     async getGamesOfCurrentFestival() {
         return await this.gameService.getGamesOfCurrentFestival();
     }
+
+
 
 
 
