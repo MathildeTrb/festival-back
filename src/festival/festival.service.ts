@@ -9,6 +9,7 @@ import {ExhibitorMonitoringService} from "../exhibitorMonitoring/exhibitorMonito
 import {AreaService} from "../area/area.service";
 import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
+import { Space } from "../space/space.entity";
 
 @Injectable()
 export class FestivalService {
@@ -33,8 +34,10 @@ export class FestivalService {
 
         const savedFestival: Festival = await this.festivalRepository.save(festival);
 
+        const savedSpaces : Space[] = [];
+
         for (const space of newSpaces) {
-            await this.spaceService.create(savedFestival, space);
+            savedSpaces.push(await this.spaceService.create(savedFestival, space));
         }
 
         const exhibitors: Company[] = await this.companyService.getAllAvailableExhibitor();
@@ -43,7 +46,7 @@ export class FestivalService {
             await this.exhibitorMonitoringService.create(savedFestival, exhibitor);
         });
 
-        return savedFestival;
+        return { savedFestival, savedSpaces };
     }
 
     async synchronizeFestival() {
@@ -116,4 +119,7 @@ export class FestivalService {
           return this.gameMonitoringRepository.getAllByFestival(id)
           //return this.festivalRepository.findWithGameMonitoringsById(id);
       }*/
+    async update(festival: Festival) {
+        return this.festivalRepository.update({id: festival.id},festival)
+    }
 }

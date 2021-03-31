@@ -1,9 +1,8 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from "@nestjs/common";
-import {JwtAuthGuard} from "../auth/jwt-auth.guard";
+import {Body, Controller, Get, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import {FestivalService} from "./festival.service";
 import {SpaceDto} from "../space/space.dto";
 import {FestivalDto} from "./festival.dto";
-import {Area} from "../area/area.entity";
+import { Festival } from "./festival.entity";
 
 @Controller('festivals')
 export class FestivalController {
@@ -27,8 +26,17 @@ export class FestivalController {
     @Post()
     async create(
         @Body("festival") festival: FestivalDto,
-        @Body("spaces") spaces: SpaceDto[]) {
+        @Body("spaces") spaces: SpaceDto[]
+    ){
+        console.log(spaces)
         return await this.festivalService.create(festival, spaces);
+    }
+
+    @Put()
+    async update(
+      @Body("festival") festival: Festival
+    ){
+        return await this.festivalService.update(festival)
     }
 
     @Get()
