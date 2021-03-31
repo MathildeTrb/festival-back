@@ -81,7 +81,10 @@ export class FestivalService {
     }
 
     async getById(id: number) {
-        return this.festivalRepository.findOne(id);
+        return this.festivalRepository.findOne({
+            where: {id: id},
+            relations: ["spaces"]
+        });
     }
 
     async getCurrentWithGames() {

@@ -56,6 +56,8 @@ export class FestivalController {
 
     @Get(":id")
     async getById(@Param('id', ParseIntPipe) id: number) {
+        const res = await this.festivalService.getById(id)
+        console.log(res)
         return await this.festivalService.getById(id);
     }
 
