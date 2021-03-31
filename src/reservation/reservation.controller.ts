@@ -24,7 +24,6 @@ export class ReservationController {
     async getAllByIdFestival(@Param("id", ParseIntPipe) id: number) {
 
         const reservations: Reservation[] = await this.reservationService.getAllByIdFestival(id);
-        console.log(reservations)
         return reservations;
     }
 

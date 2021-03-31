@@ -28,7 +28,6 @@ export class FestivalController {
         @Body("festival") festival: FestivalDto,
         @Body("spaces") spaces: SpaceDto[]
     ){
-        console.log(spaces)
         return await this.festivalService.create(festival, spaces);
     }
 
@@ -56,6 +55,7 @@ export class FestivalController {
 
     @Get(":id")
     async getById(@Param('id', ParseIntPipe) id: number) {
+        const res = await this.festivalService.getById(id)
         return await this.festivalService.getById(id);
     }
 

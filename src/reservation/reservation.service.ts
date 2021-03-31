@@ -1,4 +1,4 @@
-import {Inject, Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import {Repository} from "typeorm";
 import {Reservation} from "./reservation.entity";
 import {ReservationDto} from "./reservation.dto";
@@ -16,9 +16,6 @@ export class ReservationService {
 
     async create(newReservation: ReservationDto) {
 
-        console.log("Voici ma nouvelle réservation" + newReservation);
-        console.log(newReservation)
-
         const reservation: Reservation = new Reservation();
         reservation.needVolunteer = newReservation.needVolunteer;
         reservation.willCome = newReservation.willCome;
@@ -26,10 +23,10 @@ export class ReservationService {
         reservation.exhibitorMonitoring = newReservation.exhibitorMonitoring;
         const savedReservation = await this.reservationRepository.save(reservation);
 
-        console.log("voici ma saved réservation " + savedReservation);
+        console.log(newReservation)
+        console.log(newReservation.reservationDetails)
 
-        newReservation.reservationsDetails.map(async reservationDetails => {
-            console.log("voici ma réservation détails");
+        newReservation.reservationDetails.map(async reservationDetails => {
             await this.reservationDetailsService.create(savedReservation, reservationDetails);
         });
 
