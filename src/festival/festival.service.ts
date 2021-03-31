@@ -97,7 +97,6 @@ export class FestivalService {
     }
 
     async getGamesNotPlaced(id){
-        console.log(id)
         return await this.festivalRepository.createQueryBuilder("festival")
             .innerJoinAndSelect("festival.areas", "area")
             .innerJoinAndSelect("area.gameMonitorings", "gameMonitoring")

@@ -9,7 +9,7 @@ export class ReservationDto{
     discount: number;
     mailingDate: Date;
     paymentDate: Date;
-    reservationsDetails: ReservationDetailsDto[];
+    reservationDetails: ReservationDetailsDto[];
     exhibitorMonitoring: ExhibitorMonitoringDto;
     gameMonitorings: GameMonitoring[];
 }
