@@ -31,4 +31,9 @@ export class CompanyController {
     async getById(@Param("id", ParseIntPipe) id: number) {
         return await this.companyService.getById(id);
     }
+
+    @Get()
+    async getAll(@Param("id", ParseIntPipe) id: number) {
+        return await this.companyService.getAll()
+    }
 }

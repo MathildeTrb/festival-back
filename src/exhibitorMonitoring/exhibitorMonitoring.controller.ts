@@ -1,11 +1,23 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import {ExhibitorMonitoringService} from "./exhibitorMonitoring.service";
 import { ExhibitorMonitoringDto } from "./exhibitorMonitoring.dto";
+import {FestivalDto} from "../festival/festival.dto";
+import {Festival} from "../festival/festival.entity";
+import {ExhibitorMonitoring} from "./exhibitorMonitoring.entity";
+import {Company} from "../company/company.entity";
 
 @Controller("exhibitorMonitorings")
 export class ExhibitorMonitoringController {
 
     constructor(private readonly exhibitorMonitoringService: ExhibitorMonitoringService ) {
+    }
+
+    @Post()
+    async create(
+        @Body("festival") festival: Festival,
+        @Body("company") company: Company
+    ){
+        return await this.exhibitorMonitoringService.create(festival,company)
     }
 
     @Get("festival/:idFestival")
@@ -18,7 +30,11 @@ export class ExhibitorMonitoringController {
         return await this.exhibitorMonitoringService.getPeopleContacted(idFestival)
     }
 
-
+    @Get("festival/:idFestival/exhibitorsNotInFestival")
+    async getExhibitorsNotInFestival(@Param("idFestival", ParseIntPipe) idFestival: number) {
+        console.log("ICI")
+        return await this.exhibitorMonitoringService.getExhibitorsNotInFestival(idFestival)
+    }
 
     @Get()
     async getAll(){

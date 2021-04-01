@@ -33,6 +33,14 @@ export class CompanyDto {
     @IsBoolean()
     canBeExhibitor: boolean;
 
+    //
+    @IsBoolean()
+    isDeleted: boolean;
+    games: Game[]
+    contacts: Contact[]
+    //
+
+
     /*contacts: Contact[];
 
     games: Game[];*/
