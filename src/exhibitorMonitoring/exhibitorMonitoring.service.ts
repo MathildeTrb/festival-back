@@ -5,16 +5,22 @@ import {Festival} from "../festival/festival.entity";
 import {Company} from "../company/company.entity";
 import {Equal, IsNull, MoreThan, Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
+import {CompanyService} from "../company/company.service";
+import {CompanyDto} from "../company/company.dto";
+import {FestivalDto} from "../festival/festival.dto";
 
 
 @Injectable()
 export class ExhibitorMonitoringService {
 
     constructor(
+        private readonly companyService: CompanyService,
         @InjectRepository(ExhibitorMonitoring)
         private readonly exhibitorMonitoringRepository: Repository<ExhibitorMonitoring>
-    ) {
-    }
+
+    ) {}
+
+
 
     async create(festival: Festival, exhibitor: Company) {
         const exhibitorMonitoring: ExhibitorMonitoring = new ExhibitorMonitoring();
@@ -164,5 +170,28 @@ export class ExhibitorMonitoringService {
             },
             relations:["exhibitor"]
         })
+    }
+
+    async getExhibitorsNotInFestival(id: number): Promise<Company[]>{
+        const allCompanies = await this.companyService.getAllAvailableExhibitor()
+        const allExhitbitors = await this.getByFestival(id)
+
+        const res = []
+        let check = false
+        allCompanies.map((company) =>{
+            allExhitbitors.map((exhibitor) => {
+                if(exhibitor.exhibitor.id == company.id){
+                    check=true
+                }
+            })
+            if(check==false){
+                res.push(company)
+            }
+            check=false
+        })
+        return res
+
+
+
     }
 }

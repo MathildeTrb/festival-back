@@ -2,6 +2,7 @@ import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Game} from "../game/game.entity";
 import {Contact} from "../contact/contact.entity";
 import {CompanyDto} from "./company.dto";
+import {isDataURI} from "class-validator";
 
 @Entity("company")
 export class Company {
@@ -47,6 +48,10 @@ export class Company {
         company.mail = companyDto.mail;
         company.address = companyDto.address;
         company.canBeExhibitor = companyDto.canBeExhibitor;
+
+        company.isDeleted = companyDto.isDeleted;
+        company.games = companyDto.games;
+        company.contacts = companyDto.contacts
 
         return company;
     }
