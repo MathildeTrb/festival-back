@@ -15,9 +15,10 @@ export class ExhibitorMonitoringController {
     @Post()
     async create(
         @Body("festival") festival: Festival,
-        @Body("company") company: Company
+        @Body("company") company: Company,
+        @Body("comment") comment: string
     ){
-        return await this.exhibitorMonitoringService.create(festival,company)
+        return await this.exhibitorMonitoringService.create(festival,company, comment)
     }
 
     @Get("festival/:idFestival")
@@ -32,7 +33,6 @@ export class ExhibitorMonitoringController {
 
     @Get("festival/:idFestival/exhibitorsNotInFestival")
     async getExhibitorsNotInFestival(@Param("idFestival", ParseIntPipe) idFestival: number) {
-        console.log("ICI")
         return await this.exhibitorMonitoringService.getExhibitorsNotInFestival(idFestival)
     }
 
