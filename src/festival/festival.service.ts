@@ -37,7 +37,8 @@ export class FestivalService {
         const savedSpaces : Space[] = [];
 
         for (const space of newSpaces) {
-            savedSpaces.push(await this.spaceService.create(savedFestival, space));
+            space.festival = savedFestival
+            savedSpaces.push(await this.spaceService.create(space));
         }
 
         const exhibitors: Company[] = await this.companyService.getAllAvailableExhibitor();
