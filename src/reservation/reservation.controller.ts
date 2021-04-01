@@ -1,12 +1,10 @@
 import {Body, Controller, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
 import {ReservationService} from "./reservation.service";
 import {ReservationDto} from "./reservation.dto";
-import {Reservation} from "./reservation.entity";
 
 @Controller("reservations")
 export class ReservationController {
-    constructor(private readonly reservationService: ReservationService) {
-    }
+    constructor(private readonly reservationService: ReservationService) {}
 
     @Post()
     async create(
@@ -20,11 +18,19 @@ export class ReservationController {
         return await this.reservationService.update(reservation);
     }
 
+    @Put("needVolunteer")
+    async updateNeedVolunteer(@Body("reservation") reservation: ReservationDto) {
+        return await this.reservationService.updateNeedVolunteer(reservation);
+    }
+
+    @Put("willCome")
+    async updateWillCome(@Body("reservation") reservation: ReservationDto) {
+        return await this.reservationService.updateWillCome(reservation);
+    }
+
     @Get("festival/:id")
     async getAllByIdFestival(@Param("id", ParseIntPipe) id: number) {
-
-        const reservations: Reservation[] = await this.reservationService.getAllByIdFestival(id);
-        return reservations;
+        return await this.reservationService.getAllByIdFestival(id);
     }
 
 

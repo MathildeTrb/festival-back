@@ -17,14 +17,13 @@ export class ReservationService {
     async create(newReservation: ReservationDto) {
 
         const reservation: Reservation = new Reservation();
+
         reservation.needVolunteer = newReservation.needVolunteer;
         reservation.willCome = newReservation.willCome;
         reservation.discount = newReservation.discount;
         reservation.exhibitorMonitoring = newReservation.exhibitorMonitoring;
-        const savedReservation = await this.reservationRepository.save(reservation);
 
-        console.log(newReservation)
-        console.log(newReservation.reservationDetails)
+        const savedReservation = await this.reservationRepository.save(reservation);
 
         newReservation.reservationDetails.map(async reservationDetails => {
             await this.reservationDetailsService.create(savedReservation, reservationDetails);
@@ -53,6 +52,18 @@ export class ReservationService {
             mailingDate: reservation.mailingDate,
             paymentDate: reservation.paymentDate
         });
+    }
+
+    async updateNeedVolunteer(reservation: ReservationDto) {
+        return this.reservationRepository.update(reservation.id, {
+            needVolunteer: reservation.needVolunteer
+        })
+    }
+
+    async updateWillCome(reservation: ReservationDto) {
+        return this.reservationRepository.update(reservation.id,  {
+            willCome: reservation.willCome
+        })
     }
 }
 

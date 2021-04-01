@@ -19,13 +19,11 @@ export class GameController {
 
     @Get(":idFestival/allGames")
     async getAllGamesByFestival(@Param("idFestival", ParseIntPipe) id: number){
-        console.log("GET ALL GAMES FESTIVAL")
         return await this.gameService.getAllGamesByFestival(id)
     }
 
     @Get(":idFestival/gamesNotPlaced")
     async getGamesNotPlacedByFestival(@Param("idFestival", ParseIntPipe) id: number){
-        console.log("GET NOT PLACED GAMES FESTIVAL")
         return await this.gameService.getGamesNotPlacedByFestival(id)
     }
 

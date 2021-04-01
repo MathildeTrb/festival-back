@@ -99,6 +99,7 @@ export class ExhibitorMonitoringService {
             relations: [
                 "status",
                 "exhibitor",
+                "festival",
                 "exhibitor.games",
                 "exhibitor.contacts",
                 "reservation",

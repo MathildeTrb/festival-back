@@ -19,7 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    console.log(this.configService.get<string>("SECRET"))
     const user : User = await this.userService.getById(payload.id)
     const {password, ...result} = user
     return { ...result};

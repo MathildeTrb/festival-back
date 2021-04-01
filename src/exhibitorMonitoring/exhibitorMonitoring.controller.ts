@@ -63,7 +63,6 @@ export class ExhibitorMonitoringController {
 
     @Get("festival/:idFestival/peopleNotContacted")
     async getPeopleNotContactedByFestival(@Param("idFestival", ParseIntPipe) idFestival: number){
-        console.log("people not contacted")
         return await this.exhibitorMonitoringService.getPeopleNotContactedByFestival(idFestival)
     }
 

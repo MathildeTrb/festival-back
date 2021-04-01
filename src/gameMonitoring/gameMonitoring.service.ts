@@ -13,18 +13,15 @@ export class GameMonitoringService {
     ) {
     }
 
-    async create(gameMDto : GameMonitoringDto){
-        const gameMonitoring: GameMonitoring = new GameMonitoring();
-
-        gameMonitoring.reservation = gameMDto.reservation;
-        gameMonitoring.area = gameMDto.area;
-        gameMonitoring.game = gameMDto.game;
+    async create(gameMonitoringDto : GameMonitoringDto){
+        const gameMonitoring: GameMonitoring = GameMonitoring.createFromDto(gameMonitoringDto);
 
         return this.gameMonitoringRepository.save(gameMonitoring)
     }
 
-    async update(gameMDto: GameMonitoringDto){
-        return this.gameMonitoringRepository.update({reservation: gameMDto.reservation, game: gameMDto.game}, gameMDto)
+    async update(gameMonitoringDto: GameMonitoringDto){
+        console.log(gameMonitoringDto)
+        return this.gameMonitoringRepository.update({reservation: gameMonitoringDto.reservation, game: gameMonitoringDto.game}, gameMonitoringDto)
     }
 
     async getAllByFestival(id: number) {
@@ -40,10 +37,18 @@ export class GameMonitoringService {
     }
 
     async getGamesNotPlacedByFestival(id: number) : Promise<GameMonitoring[]> {
-        const test = await this.gameMonitoringRepository.getGamesNotPlacedByFestival(id)
-        console.log(test)
-        return test
+        return await this.gameMonitoringRepository.getGamesNotPlacedByFestival(id)
     }
 
+    async delete(idReservation: number, idGame: number) {
+        return this.gameMonitoringRepository.delete({
+            reservation: {
+                id: idReservation
+            },
+            game: {
+                id: idGame
+            }
+        })
+    }
 }
 

@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put} from "@nestjs/common";
 import {GameMonitoringService} from "./gameMonitoring.service";
 import {GameMonitoringDto} from "./gameMonitoring.dto";
 
@@ -9,20 +9,16 @@ export class GameMonitoringController {
 
     @Get(":idFestival/gamesNotPlaced")
     async getGamesNotPlacedByFestival(@Param("idFestival", ParseIntPipe) id:number){
-        console.log("GAMES NOT PLACED")
         return await this.gameMonitoringService.getGamesNotPlacedByFestival(id)
     }
 
     @Get(":idFestival/gamesNotReceived")
     async getGamesNotReceivedByFestival(@Param("idFestival", ParseIntPipe) id:number){
-        console.log("GAMES NOT RECEIVED")
         return await this.gameMonitoringService.getGamesNotReceivedByFestival(id)
     }
 
     @Get(":idFestival")
     async getAllGamesByFestival(@Param("idFestival", ParseIntPipe) id: number){
-
-        console.log("ALL GAMES BY FESTIVAL")
         return await this.gameMonitoringService.getAllByFestival(id)
     }
 
@@ -32,8 +28,16 @@ export class GameMonitoringController {
     }
 
     @Put()
-    async update(@Body("gameMonitoring") gameM: GameMonitoringDto){
-        return await this.gameMonitoringService.update(gameM)
+    async update(@Body("gameMonitoring") gameMonitoringDto: GameMonitoringDto){
+        return await this.gameMonitoringService.update(gameMonitoringDto)
+    }
+
+    @Delete(":idReservation/:idGame")
+    async delete(
+        @Param("idReservation", ParseIntPipe) idReservation: number,
+        @Param("idGame", ParseIntPipe) idGame: number
+    ) {
+        return await this.gameMonitoringService.delete(idReservation, idGame);
     }
 
     @Get("current")
