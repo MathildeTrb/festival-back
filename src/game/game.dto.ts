@@ -12,5 +12,5 @@ export class GameDto {
     type: number;
     manual: string;
     imageUrl: string;
-    editor: number
+    editor: Company
 }
