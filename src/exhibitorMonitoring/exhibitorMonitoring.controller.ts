@@ -32,7 +32,6 @@ export class ExhibitorMonitoringController {
 
     @Get("festival/:idFestival/exhibitorsNotInFestival")
     async getExhibitorsNotInFestival(@Param("idFestival", ParseIntPipe) idFestival: number) {
-        console.log("ICI")
         return await this.exhibitorMonitoringService.getExhibitorsNotInFestival(idFestival)
     }
 

@@ -176,7 +176,7 @@ export class ExhibitorMonitoringService {
         const allCompanies = await this.companyService.getAllAvailableExhibitor()
         const allExhitbitors = await this.getByFestival(id)
 
-        const res = []
+        const res: Company[] = []
         let check = false
         allCompanies.map((company) =>{
             allExhitbitors.map((exhibitor) => {
