@@ -28,6 +28,7 @@ export class FestivalService {
         festival.name = newFestival.name;
         festival.isCurrent = newFestival.isCurrent;
         festival.description = newFestival.description;
+        festival.imageUrl = newFestival.imageUrl;
         if (festival.isCurrent) {
             await this.synchronizeFestival();
         }
