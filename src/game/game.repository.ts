@@ -42,6 +42,17 @@ export class GameRepository extends Repository<Game> {
             .getMany();
     }
 
+    async getGamesByEditorOfFestival(id:number): Promise<Game[]> {
+        return this.createQueryBuilder("game")
+            .innerJoinAndSelect("game.type", "type")
+            .innerJoinAndSelect("game.editor", "editor")
+            .innerJoinAndSelect("game.gameMonitorings", "gameMonitorings")
+            .innerJoinAndSelect("gameMonitorings.area", "area")
+            .innerJoin("area.festival", "festival")
+            .where("festival.isCurrent = :value", {value: true})
+            .andWhere("editor.id = :id", {id:id})
+            .getMany();
+    }
     async getAllGamesByFestival(id:number): Promise<Game[]> {
         return this.createQueryBuilder("game")
             .innerJoinAndSelect("game.gameMonitorings", "gameMonitoring")
@@ -60,5 +71,7 @@ export class GameRepository extends Repository<Game> {
             .andWhere("festival.id = :id", {id:id} )
             .getMany()
     }
+
+
 
 }

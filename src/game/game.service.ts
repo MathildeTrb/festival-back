@@ -60,7 +60,6 @@ export class GameService {
         return Array.from(new Set(duplicateEditors.map(editor => editor.id))).map(id => duplicateEditors.find(e => e.id === id))
     }
 
-
     async getAllGamesByFestival(id: number): Promise<Game[]>{
         return this.gameRepository.getAllGamesByFestival(id)
     }
@@ -68,4 +67,9 @@ export class GameService {
     async getGamesNotPlacedByFestival(id: number) : Promise<Game[]>{
         return this.gameRepository.getGamesNotPlacedByFestival(id)
     }
+
+    async getGamesByEditorOfCurrentFestival(id:number): Promise<Game[]>{
+        return this.gameRepository.getGamesByEditorOfFestival(id)
+    }
+
 }
