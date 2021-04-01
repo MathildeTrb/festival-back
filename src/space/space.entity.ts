@@ -31,7 +31,7 @@ export class Space {
   @OneToMany(() => ReservationDetails, reservationDetails => reservationDetails.space)
   reservationDetails: ReservationDetails[];
 
-  static createFromDto(festival : Festival, spaceDto: SpaceDto) {
+  static createFromDto(spaceDto: SpaceDto) {
     const space: Space = new Space();
 
     space.label = spaceDto.label;
@@ -39,7 +39,7 @@ export class Space {
     space.meterPrice = spaceDto.meterPrice;
     space.tableTotal = spaceDto.tableTotal;
     space.tableRemaining = spaceDto.tableTotal;
-    space.festival = festival
+    space.festival = spaceDto.festival
 
     return space;
   }

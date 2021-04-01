@@ -14,8 +14,8 @@ export class SpaceService {
   }
 
 
-  async create(festival: Festival, newSpace: SpaceDto) {
-    const space: Space = Space.createFromDto(festival, newSpace);
+  async create(newSpace: SpaceDto) {
+    const space: Space = Space.createFromDto(newSpace);
     return this.spaceRepository.save(space);
   }
 
@@ -32,6 +32,10 @@ export class SpaceService {
 
   async updateTableRemaining(space : Space, tableRemaining: number) {
       return this.spaceRepository.update({id : space.id}, {tableRemaining : tableRemaining})
+  }
+
+  async update(space: Space) {
+    return this.spaceRepository.update({id: space.id}, space)
   }
 }
 
