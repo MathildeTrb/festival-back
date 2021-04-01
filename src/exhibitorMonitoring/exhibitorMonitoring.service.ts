@@ -22,11 +22,12 @@ export class ExhibitorMonitoringService {
 
 
 
-    async create(festival: Festival, exhibitor: Company) {
+    async create(festival: Festival, exhibitor: Company, comment?: string) {
         const exhibitorMonitoring: ExhibitorMonitoring = new ExhibitorMonitoring();
 
         exhibitorMonitoring.exhibitor = exhibitor;
         exhibitorMonitoring.festival = festival;
+        exhibitorMonitoring.comment = comment ? comment : null;
 
         return this.exhibitorMonitoringRepository.save(exhibitorMonitoring)
     }
