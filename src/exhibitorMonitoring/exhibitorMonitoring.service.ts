@@ -29,7 +29,19 @@ export class ExhibitorMonitoringService {
         exhibitorMonitoring.festival = festival;
         exhibitorMonitoring.comment = comment ? comment : null;
 
-        return this.exhibitorMonitoringRepository.save(exhibitorMonitoring)
+        const savedExhibitorMonitoring = await this.exhibitorMonitoringRepository.save(exhibitorMonitoring)
+
+        return this.exhibitorMonitoringRepository.findOne({
+            where: {
+                exhibitor: savedExhibitorMonitoring.exhibitor,
+                festival: savedExhibitorMonitoring.festival
+            },
+            relations: [
+                "festival",
+                "exhibitor",
+                "status"
+            ]
+        })
     }
 
     async getAll(): Promise<ExhibitorMonitoring[]> {
