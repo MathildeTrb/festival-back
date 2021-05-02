@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req, Request, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { AuthService } from "../auth/auth.service";
 import { LocalAuthGuard } from "../auth/local-auth.guard";
