@@ -16,6 +16,10 @@ export class GameController {
 
     constructor(private readonly gameService: GameService) {}
 
+    /**
+     * @api {get} api/games/currentEditor get games
+     * @apiGroup games
+     */
     @Get("currentEditor")
     async getEditorsOfCurrentFestival(){
         return await this.gameService.getEditorsOfCurrentFestival();
