@@ -27,7 +27,7 @@ export class ContactController {
      * @api {delete} api/contacts/:id Delete a contact by id
      * @apiName DeleteContact
      * @apiGroup contacts
-     * @apiParam {int} id=4 Unique contacts id
+     * @apiParam {int} id Unique contacts id
      */
     @Delete(":id")
     async delete(@Param("id", ParseIntPipe) id: number) {
