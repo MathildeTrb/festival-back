@@ -7,6 +7,12 @@ export class ContactController {
 
     constructor(private readonly contactService: ContactService) {}
 
+    /**
+     * @api {post} api/contacts Create a contact
+     * @apiName CreateContact
+     * @apiGroup contacts
+     * @apiBody {ContactDto} contact
+     */
     @Post()
     async create(@Body("contact") contact: ContactDto) {
         return this.contactService.create(contact)
@@ -17,6 +23,12 @@ export class ContactController {
         return this.contactService.update(contact);
     }
 
+    /**
+     * @api {delete} api/contacts/:id Delete a contact by id
+     * @apiName DeleteContact
+     * @apiGroup contacts
+     * @apiParam {int} id Unique contacts id
+     */
     @Delete(":id")
     async delete(@Param("id", ParseIntPipe) id: number) {
         return this.contactService.delete(id);
