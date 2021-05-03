@@ -10,7 +10,6 @@ import {
     Put
 } from "@nestjs/common";
 import {GameDto} from "./game.dto";
-import {Game} from "./game.entity";
 
 @Controller("games")
 export class GameController {
@@ -18,7 +17,7 @@ export class GameController {
     constructor(private readonly gameService: GameService) {}
 
     /**
-     * @api api/games/currentEditor get editor of current festival
+     * @api {get} api/games/currentEditor get editor of current festival
      * @apiGroup games
      */
     @Get("currentEditor")
