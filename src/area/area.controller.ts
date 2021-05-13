@@ -10,6 +10,7 @@ export class AreaController {
      * @api {post} /api/areas Create a new area
      * @apiName CreateArea
      * @apiGroup areas
+     * @apiParam {int} test=10 Unique truc
      * @apiBody {AreaDto} area added Area
      */
     @Post()
@@ -43,7 +44,7 @@ export class AreaController {
      * @api {get} api/areas/current/:idGames get all areas for a game in current festival
      * @apiName GetAreasByGameCurrent
      * @apiGroup areas
-     * @apiParam {int} idGame Games unique Id
+     * @apiParam {int} idGame=8 Games unique Id
      */
     @Get("current/:idGame")
     async getAreasByGame(@Param("idGame", ParseIntPipe) idGame: number) {
